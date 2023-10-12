@@ -50,6 +50,9 @@ dependencies:
   cloud_firestore: ^4.9.3
   firebase_storage: ^11.2.8
 
+#  image to widget
+  widgets_to_image: ^0.0.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

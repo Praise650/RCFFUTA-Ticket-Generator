@@ -1,6 +1,9 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:rcf_attendance_generator/app/images.dart';
+import 'package:widgets_to_image/widgets_to_image.dart';
 import '../../../core/data/download_qr_datasource.dart';
 import '../../../core/repos/download_qr_repo.dart';
 import '../../styles/color.dart';
@@ -9,6 +12,11 @@ import '../../widgets/download_ticket/infos_right_widget.dart';
 import 'controller/download_qr_controller.dart';
 
 class DownloadQR extends StatelessWidget {
+  // WidgetsToImageController to access widget
+  WidgetsToImageController controllers = WidgetsToImageController();
+  // to save image bytes of widget
+  Uint8List? bytes;
+
   DownloadQR({super.key});
   final DownloadQrController controller = DownloadQrController(
     repository: DownloadQrRepo(
