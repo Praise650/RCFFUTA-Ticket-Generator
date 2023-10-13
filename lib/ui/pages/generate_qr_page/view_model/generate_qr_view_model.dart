@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/repos/user_repo.dart';
+import '../../../../core/service/firestore_service.dart';
+import '../../../../core/service/auth_service.dart';
 import '../../download_qr/download_qr.dart';
+import '../../../../app/locator.dart';
 
 
 
 class GenerateQrViewModel extends ChangeNotifier {
-  final UserRepo _userRepo = UserRepo();
+  final _authService = locator<AuthService>();
+  final _firestoreService = locator<FireStoreService>();
   TextEditingController firstname = TextEditingController();
   TextEditingController lastname = TextEditingController();
   String? gender = 'Male';

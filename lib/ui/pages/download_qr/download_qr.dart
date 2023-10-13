@@ -50,6 +50,13 @@ class DownloadQR extends StatelessWidget {
                               constraints: constraints,
                               controller: controller,
                             ),
+                            WidgetsToImage(
+                              controller: controllers,
+                              child: InfosRight(
+                                constraints: constraints,
+                                controller: controller,
+                              ),
+                            ),
                           ],
                         ),
                       )
@@ -64,9 +71,12 @@ class DownloadQR extends StatelessWidget {
                               controller: controller,
                             ),
                             const SizedBox(width: 32),
-                            InfosRight(
-                              constraints: constraints,
-                              controller: controller,
+                            WidgetsToImage(
+                              controller: controllers,
+                              child: InfosRight(
+                                constraints: constraints,
+                                controller: controller,
+                              ),
                             ),
                           ],
                         ),

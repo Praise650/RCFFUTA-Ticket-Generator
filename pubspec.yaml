@@ -36,9 +36,12 @@ dependencies:
   flutter_svg: ^2.0.7
   flutter_hooks: ^0.20.3
   intl: ^0.18.1
-  provider: ^6.0.5
 
+#  state_management:
+  provider: ^6.0.5
+  get_it: ^7.6.0
   get: ^4.6.5
+
   google_fonts: ^5.1.0
   dartz: ^0.10.1
   http: ^1.1.0
