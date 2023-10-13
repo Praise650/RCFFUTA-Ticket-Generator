@@ -1,10 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
+import 'ui/pages/auth/view_model/login_controller.dart';
+import 'ui/pages/display_attendee/view_model/list_member_controller.dart';
+import 'ui/pages/download_qr/controller/download_qr_controller.dart';
 import 'ui/pages/generate_qr_page/view_model/generate_qr_view_model.dart';
-import 'ui/pages/generate_qr_page/general_qr_page.dart';
+import 'ui/pages/generate_qr_page/generate_qr_page.dart';
 import 'app/app.dart';
 
 void main() async {
@@ -49,8 +51,11 @@ class _MyAppState extends State<MyApp> {
           return MultiProvider(
             providers: [
               ChangeNotifierProvider(create: (_) => GenerateQrViewModel()),
+              ChangeNotifierProvider(create: (_) => DownloadQrController()),
+              ChangeNotifierProvider(create: (_) => AuthViewModel()),
+              ChangeNotifierProvider(create: (_) => DispController()),
             ],
-            child: const GetMaterialApp(
+            child: const MaterialApp(
               // builder: (context,snaps){},
               home: GenerateQRPage(),
               debugShowCheckedModeBanner: false,

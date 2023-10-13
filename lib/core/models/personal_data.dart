@@ -1,141 +1,100 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class PersonalDataForm {
 
   final String? fullname;
   final String? firstname;
   final String? lastname;
   final String? email;
+  final String? phoneNumber;
   final String? gender;
-  final String? department;
-  final String? homeAddress;
-  final int? yearOfGraduation;
-  final int? sessionOfAdmission;
+  final String? zone;
+  final String? unit;
+  final String? workerOrExec;
+  final String? portfolio;
+  final String? uuid;
 
   // old parameters that can be used later
-  String? id;
-  DateTime? dateOfBirth;
-  String? stateOfOrigin;
-  String? localGovernmentOfOrigin;
-  String? homeTown;
-  String? phoneNumber;
-
-  /// The State of residence
-  String? state;
-  String? localGovernment;
-  String? levelOfEducation;
-  String? typeOfOccupation;
-  bool? isSkillful;
-  String? skillDescription;
-  String? employmentStatus;
-  String? skill;
-  String? imageUrl;
-  DateTime? registrationDate;
-  String? maritalStatus;
-  String? senatorialDistrict;
+  final String? id;
+  final String? imageUrl;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
+  final bool? attending;
 
   PersonalDataForm({
     this.fullname,
     this.firstname,
     this.lastname,
     this.email,
+    this.phoneNumber,
     this.gender,
-    this.homeAddress,
-    this.department,
-    this.yearOfGraduation,
-    this.sessionOfAdmission,
+    this.zone,
+    this.unit,
+    this.workerOrExec,
+    this.portfolio,
     //parameters to be used later
     this.id,
-    this.dateOfBirth,
-    this.stateOfOrigin,
-    this.localGovernmentOfOrigin,
-    this.homeTown,
-    this.phoneNumber,
-    this.state,
-    this.localGovernment,
-    this.levelOfEducation,
-    this.typeOfOccupation,
-    this.isSkillful,
-    this.skillDescription,
-    this.employmentStatus,
-    this.skill,
+    this.uuid,
     this.imageUrl,
-    this.registrationDate,
-    this.maritalStatus,
-    this.senatorialDistrict,
+    this.createdAt,
+    this.updatedAt,
+    this.attending
   });
 
   factory PersonalDataForm.fromJson(Map<String, dynamic> json) =>
       PersonalDataForm(
-        fullname: (json["firstname"] + json["lastname"]) as String,
+        id: json["id"] as String,
+        fullname: (json["fullname"]) as String,
         firstname: json["firstname"],
         lastname: json["lastname"],
         email: json["email"],
+        phoneNumber: json["phoneNumber"],
         gender: json["gender"],
-        homeAddress: json["home_address"],
-        department: json["department"],
-        yearOfGraduation: json["year_of_grad"],
+        zone: json["zone"],
+        unit: json["unit"],
+        workerOrExec: json["workerOrExec"],
+        portfolio: json['portfolio'],
+        uuid: json['uuid'],
+        imageUrl: json["imageUrl"],
 
         // paremeters to be added later
-        id: json["id"] as String,
-        dateOfBirth: json["dateOfBirth"] != null
-            ? DateTime.parse(json["dateOfBirth"] as String)
+        attending: json['attending'],
+        createdAt: json["createdAt"] != null
+            ? DateTime.parse(json["createdAt"] as String)
             : null,
-        stateOfOrigin: json["stateOfOrigin"],
-        localGovernmentOfOrigin: json["localGovernmentOfOrigin"],
-        homeTown: json["homeTown"],
-        phoneNumber: json["phoneNumber"],
-        state: json["state"],
-        localGovernment: json["localGovernment"],
-        levelOfEducation: json["levelOfEducation"],
-        typeOfOccupation: json["typeOfOccupation"],
-        isSkillful: json["isSkillful"],
-        skillDescription: json["skillDescription"],
-        // registrationDate: (json["registrationDate"] as Timestamp).toDate(),
-        // registrationDate: (json["registrationDate"] as DateTime).toDate(),
-        employmentStatus: json["employmentStatus"],
-        imageUrl: json["imageUrl"],
-        skill: json["skill"],
-        maritalStatus: json["maritalStatus"],
-        senatorialDistrict: json["senatorialDistrict"],
+        updatedAt: json["updatedAt"] != null
+            ? DateTime.parse(json["updatedAt"] as String)
+            : null,
+        // createdAt: (json["createdAt"] as Timestamp).toDate(),
+        // updatedAt: (json["updatedAt"] as Timestamp).toDate(),
       );
 
   Map<String, dynamic> _toJson() => {
-        // 'fullname':fullname,
+        'fullname':fullname,
         'firstname':firstname,
         'lastname':lastname,
         'email':email,
+        'phoneNumber': phoneNumber,
         'gender':gender,
-        'department':department,
-        'home_address':homeAddress,
-        'year_of_grad':yearOfGraduation,
-        // 'sessionOfAdmission':sessionOfAdmission,
+        'zone':zone,
+        'unit':unit,
+        'workerOrExec':workerOrExec,
+        'portfolio':portfolio,
+        'uuid':uuid,
+        'imageUrl': imageUrl,
+        'attending':attending,
 
         //parameters that can be used later 
         'id': id,
-        'dateOfBirth': dateOfBirth?.toIso8601String(),
-        'stateOfOrigin': stateOfOrigin,
-        'localGovernmentOfOrigin': localGovernmentOfOrigin,
-        'homeTown': homeTown,
-        'phone': phoneNumber,
-        'state': state,
-        'localGovernment': localGovernment,
-        'levelOfEducation': levelOfEducation,
-        'typeOfOccupation': typeOfOccupation,
-        'isSkillful': isSkillful,
-        'skillDescription': skillDescription,
-        'registrationDate': registrationDate,
-        'employmentStatus': employmentStatus,
-        'imageUrl': imageUrl,
-        'skill': skill,
-        'maritalStatus': maritalStatus,
-        'senatorialDistrict': senatorialDistrict,
+        'createdAt': createdAt?.toIso8601String(),
+        'updatedAt': updatedAt?.toIso8601String(),
       };
 
   Map<String, dynamic> toJson() => _toJson();
 
-  // int numbersOfYearsSpentInSchool() => sessionOfAdmission! + yearOfGraduation!;
 
   @override
   String toString() {
-    return 'PersonalDataForm{id: $id, fullName: $fullname, gender: $gender, dateOfBirth: $dateOfBirth, stateOfOrigin: $stateOfOrigin, localGovernmentOfOrigin: $localGovernmentOfOrigin, homeTown: $homeTown, phoneNumber: $phoneNumber, email: $email, state: $state, localGovernment: $localGovernment, levelOfEducation: $levelOfEducation, typeOfOccupation: $typeOfOccupation, isSkillful: $isSkillful, skillDescription: $skillDescription, employmentStatus: $employmentStatus, skill: $skill, imageUrl: $imageUrl, registrationDate: $registrationDate, maritalStatus: $maritalStatus, senatorialDistrict: $senatorialDistrict}';
+    return 'PersonalDataForm{id: $id, fullname: $fullname, gender: $gender, phoneNumber: $phoneNumber, email: $email, imageUrl: $imageUrl, updatedAt: $updatedAt,createdAt: $createdAt,}';
   }
 }

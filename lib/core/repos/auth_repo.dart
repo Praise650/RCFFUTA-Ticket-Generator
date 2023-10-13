@@ -66,7 +66,7 @@ class AuthRepo  implements AuthService{
   }
 
   @override
-  Future<User?> register({String? email, String? password}) async{
+  Future<User?> register({String? email, String? password,}) async{
     User? user;
     try {
       if (email != null && password != null) {
@@ -76,6 +76,10 @@ class AuthRepo  implements AuthService{
         );
         user = userCredential.user;
         if (user != null) {
+          // if (snapshot.exists) {
+          //   print("Login successful");
+          //   // firestoreService.setUser(snapshot.data() as Map<String, dynamic>);
+          // }
           return user;
         } else {
           throw Exception('Could not find user');

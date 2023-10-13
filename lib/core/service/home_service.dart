@@ -1,7 +1,7 @@
-import 'package:dartz/dartz.dart';
-
-import '../models/user_model.dart';
-
-abstract class IHomeRepository {
-  Future<Either<UserModel, String>> getProfile(String user);
-}
+// import 'package:dartz/dartz.dart';
+//
+// import '../models/personal_data.dart';
+//
+// abstract class IHomeRepository {
+//   Future<Either<PersonalDataForm, String>> getProfile(String user);
+// }

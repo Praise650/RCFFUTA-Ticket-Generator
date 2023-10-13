@@ -26,7 +26,11 @@ class App {
 
   static Future<List<PersonalDataForm>> getListOfUsers() async {
     List<PersonalDataForm> childrenList = await _store.getMembersCollection();
-    print("First attendees in User Repo: ${childrenList[0]}");
+    if(childrenList.isEmpty){
+      print("Empty list");
+    }else{
+      print("First attendees in User Repo: ${childrenList[0]}");
+    }
     return childrenList;
   }
 }

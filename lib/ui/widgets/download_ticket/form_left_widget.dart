@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rcf_attendance_generator/app/images.dart';
 
 import '../../pages/download_qr/controller/download_qr_controller.dart';
 import '../../../core/states/ticket_state.dart';
 import '../../styles/color.dart';
-
 
 class FormLeft extends StatelessWidget {
   const FormLeft({
@@ -46,120 +44,92 @@ class FormLeft extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 40),
-        Obx(() {
-          return Visibility(
-            visible: controller.state.value.runtimeType != SuccessTicketState,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'ENTER YOUR GITHUB USER',
-                  style: GoogleFonts.spaceGrotesk(
-                    fontSize: 20,
-                    color: AppColors.grayLight,
-                    fontWeight: FontWeight.w400,
-                  ),
+        Visibility(
+          visible: controller.state.runtimeType == LoadingTicketState,
+          child: const CircularProgressIndicator(),
+        ),
+        Visibility(
+          visible: controller.state.runtimeType == FailureTicketState,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Invalid user, Check and try again.',
+                style: GoogleFonts.roboto(
+                  color: AppColors.danger,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w400,
                 ),
-                const SizedBox(height: 16),
-                Container(
-                  width: constraints.maxWidth < 600
-                      ? constraints.maxWidth
-                      : constraints.maxWidth * 0.5,
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 8, horizontal: 6),
-                  constraints: const BoxConstraints(maxWidth: 380),
-                  decoration: const BoxDecoration(color: AppColors.grayLight),
-                  child: TextField(
-                    controller: controller.userController,
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      prefixIcon: Image.asset(
-                        AppImages.github,
-                      ),
-                      hintText: 'Username',
-                      hintStyle: GoogleFonts.spaceGrotesk(
-                        color: AppColors.greyDark,
-                      ),
-                    ),
-                  ),
+              ),
+            ],
+          ),
+        ),
+        Visibility(
+          visible: controller.state.runtimeType == SuccessTicketState,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Dear ${controller.user?.fullname!}\n".toUpperCase(),
+                style: GoogleFonts.spaceGrotesk(
+                  fontSize: 20,
+                  color: AppColors.grayLight,
+                  fontWeight: FontWeight.w400,
                 ),
-                const SizedBox(height: 6),
-                Visibility(
-                  visible:
-                      controller.state.value.runtimeType == FailureTicketState,
-                  child: Text(
-                    'Invalid user. Check and try again.',
-                    style: GoogleFonts.roboto(
-                      color: AppColors.danger,
-                      fontSize: 18,
+              ),
+              Row(
+                children: [
+                  const Icon(
+                    Icons.check,
+                    color: AppColors.success,
+                  ),
+                  const SizedBox(width: 10),
+                  Text(
+                    'TICKET GENERATED SUCCESSFULLY',
+                    style: GoogleFonts.spaceGrotesk(
+                      fontSize: 20,
+                      color: AppColors.grayLight,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
-                ),
-              ],
-            ),
-          );
-        }),
-        Obx(() {
-          return Visibility(
-            visible: controller.state.value.runtimeType == SuccessTicketState,
-            child: Row(
-              children: [
-                const Icon(
-                  Icons.check,
-                  color: AppColors.success,
-                ),
-                const SizedBox(width: 10),
-                Text(
-                  'TICKET GENERATED SUCCESSFULLY',
-                  style: GoogleFonts.spaceGrotesk(
-                    fontSize: 20,
-                    color: AppColors.grayLight,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-              ],
-            ),
-          );
-        }),
+                ],
+              ),
+            ],
+          ),
+        ),
         const SizedBox(height: 16),
         Container(
           width: constraints.maxWidth < 600
               ? constraints.maxWidth
               : constraints.maxWidth * 0.5,
           constraints: const BoxConstraints(maxWidth: 380),
-          child: Obx(() {
-            return ElevatedButton(
-              onPressed: () {
-                if (controller.state.value.runtimeType != LoadingTicketState) {
-                  controller.getProfile();
-                }
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.purpleNormal,
-                padding: const EdgeInsets.symmetric(
-                  vertical: 30,
-                  horizontal: 40,
-                ),
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.zero,
-                ),
+          child: ElevatedButton(
+            onPressed: () {
+              if (controller.state.runtimeType == SuccessTicketState) {
+                controller.downloadTicket();
+              }
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.purpleNormal,
+              padding: const EdgeInsets.symmetric(
+                vertical: 30,
+                horizontal: 40,
               ),
-              child: controller.state.value.runtimeType == LoadingTicketState
-                  ? const CircularProgressIndicator()
-                  : Text(
-                      // controller.state.value.runtimeType == SuccessTicketState
-                      //     ?
-                      'DOWNLOAD',
-                          // : "GENERATE MY TICKET",
-                      style: GoogleFonts.spaceGrotesk(
-                        color: AppColors.white,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 14,
-                      ),
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.zero,
+              ),
+            ),
+            child: controller.state.runtimeType == LoadingTicketState
+                ? const CircularProgressIndicator()
+                : Text(
+                    'DOWNLOAD',
+                    style: GoogleFonts.spaceGrotesk(
+                      color: AppColors.white,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 14,
                     ),
-            );
-          }),
+                  ),
+          ),
         )
       ],
     );

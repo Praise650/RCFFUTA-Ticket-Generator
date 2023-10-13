@@ -5,7 +5,7 @@ import '../models/personal_data.dart';
 
 class UserRepo implements FireStoreService {
   final _fsInstance = FirebaseFirestore.instance;
-  String? _userId;
+  // String? _userId;
   final String membersCollectionPath = "Attendees";
   final String adminCollectionPath = "Admins";
   late CollectionReference<Map<String, dynamic>> _membersCollection;
@@ -41,7 +41,7 @@ class UserRepo implements FireStoreService {
   }
 
   @override
-  Future<PersonalDataForm> getCurrentUser(userId) async {
+  Future<PersonalDataForm> getCurrentUser(String userId) async {
     final currentUser = await _membersCollection.doc(userId).get();
     if (currentUser.exists) {
       final decodedData = currentUser.data();
@@ -74,6 +74,7 @@ class UserRepo implements FireStoreService {
     return createdMember.data()!.isEmpty ? false : true;
   }
 
+  @override
   Future<void> extractAndDownloadData(
       QuerySnapshot<Map<String, dynamic>> response,
       Map<String, List<String>> dataJson) async {

@@ -1,9 +1,9 @@
-import 'user_model.dart';
+import 'personal_data.dart';
 
 abstract class IResponse {}
 
 class SuccessResponse extends IResponse {
-  UserModel user;
+  PersonalDataForm user;
   SuccessResponse({
     required this.user,
   });

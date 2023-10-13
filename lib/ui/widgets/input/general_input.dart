@@ -86,7 +86,7 @@ class _GeneralInputState extends State<GeneralInput> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: widget.margin ?? EdgeInsets.only(bottom: 33),
+      margin: widget.margin ?? const EdgeInsets.only(bottom: 33),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -124,17 +124,18 @@ class _GeneralInputState extends State<GeneralInput> {
                         : 0.01, // it is a hidden textfield which should remain transparent and extremely small
                   ),
                   validator: (val) {
-                    if (widget.validator != null &&
-                        (widget.validator!(val) != null &&
-                            widget.validator!(val)!.isNotEmpty)) {
-                      setState(() {
-                        activeErrorState = true;
-                      });
-                      return "\u274C ${widget.validator!(val)}";
-                    }
-                    setState(() {
-                      activeErrorState = false;
-                    });
+                    // if (widget.validator != null &&
+                    //     (widget.validator!(val) != null &&
+                    //         widget.validator!(val)!.isNotEmpty)) {
+                    //   setState(() {
+                    //     activeErrorState = true;
+                    //   });
+                    //   return "\u274C ${widget.validator!(val)}";
+                    // }
+                    // setState(() {
+                    //   activeErrorState = false;
+                    // });
+                    val!.isEmpty?"Value cannot be empty":null;
                   },
                   controller: _controller,
                 ),

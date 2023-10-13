@@ -1,6 +1,5 @@
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import '../../../app/images.dart';
 import '../../pages/download_qr/controller/download_qr_controller.dart';
@@ -45,25 +44,23 @@ class InfosRight extends StatelessWidget {
               child: LayoutBuilder(builder: (context, constraints2) {
                 return Column(
                   children: [
-                    Obx(() {
-                      return ClipRRect(
+                    ClipRRect(
                         borderRadius: const BorderRadius.all(
                           Radius.circular(63),
                         ),
-                        child: controller.user.value == null
+                        child: controller.user?.imageUrl == null
                             ? Image.asset(
                                 'assets/images/img_avatar.png',
                           height: 50,
                           width: 50,
                               )
                             : Image.network(
-                                controller.user.value!.avatarUrl,
+                                controller.user!.imageUrl!,
                                 fit: BoxFit.cover,
                           height: 50,
                           width: 50,
                               ),
-                      );
-                    }),
+                      ),
                     const SizedBox(height: 16),
                     Text(
                       'ATTENDEE',
@@ -73,30 +70,26 @@ class InfosRight extends StatelessWidget {
                         color: AppColors.purpleNormal,
                       ),
                     ),
-                    Obx(() {
-                      return Text(
-                        controller.user.value == null
+                    Text(
+                        controller.user?.fullname == null
                             ? 'Your name here'
-                            : controller.user.value!.name,
+                            : controller.user!.fullname!,
                         style: GoogleFonts.spaceGrotesk(
                           fontSize: 16,
                           fontWeight: FontWeight.w700,
                           color: AppColors.greyDark,
                         ),
-                      );
-                    }),
-                    Obx(() {
-                      return Text(
-                        controller.user.value == null
+                      ),
+                    Text(
+                        controller.user?.id == null
                             ? 'Your ID here'
-                            : controller.user.value!.name,
+                            : controller.user!.id!,
                         style: GoogleFonts.spaceGrotesk(
                           fontSize: 16,
                           fontWeight: FontWeight.w700,
                           color: AppColors.greyDark,
                         ),
-                      );
-                    }),
+                      ),
                     const Expanded(child: SizedBox()),
                     Column(
                       children: [

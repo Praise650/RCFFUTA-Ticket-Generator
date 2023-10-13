@@ -8,7 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:rcf_attendance_generator/ui/pages/generate_qr_page/general_qr_page.dart';
+import 'package:rcf_attendance_generator/ui/pages/generate_qr_page/generate_qr_page.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
