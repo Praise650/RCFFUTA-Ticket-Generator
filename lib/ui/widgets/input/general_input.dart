@@ -94,7 +94,8 @@ class _GeneralInputState extends State<GeneralInput> {
             Text(
               widget.label!,
               style: headerPoppins.copyWith(
-                  color: AppColors.textSecondary,),
+                color: AppColors.textSecondary,
+              ),
               // style: kInputLabelStyle,
             ),
           Container(
@@ -123,19 +124,11 @@ class _GeneralInputState extends State<GeneralInput> {
                         ? 1
                         : 0.01, // it is a hidden textfield which should remain transparent and extremely small
                   ),
-                  validator: (val) {
-                    // if (widget.validator != null &&
-                    //     (widget.validator!(val) != null &&
-                    //         widget.validator!(val)!.isNotEmpty)) {
-                    //   setState(() {
-                    //     activeErrorState = true;
-                    //   });
-                    //   return "\u274C ${widget.validator!(val)}";
-                    // }
-                    // setState(() {
-                    //   activeErrorState = false;
-                    // });
-                    val!.isEmpty?"Value cannot be empty":null;
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'The value cannot be empty';
+                    }
+                    return null;
                   },
                   controller: _controller,
                 ),

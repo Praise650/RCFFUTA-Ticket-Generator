@@ -9,10 +9,25 @@ class ListUsersPage extends StatefulWidget {
   const ListUsersPage({Key? key}) : super(key: key);
 
   @override
-  _GenerateQRPageState createState() => _GenerateQRPageState();
+  State<ListUsersPage> createState() => _GenerateQRPageState();
 }
 
 class _GenerateQRPageState extends State<ListUsersPage> {
+
+  @override
+  void initState() {
+    super.initState();
+    _init();
+  }
+
+  _init() async {
+    try {
+      await context.read<DispController>().getUsers();
+    } catch (e) {
+      print(e);
+      // Messenger.error(e.message);
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Consumer<DispController>(builder: (context, model, _) {
@@ -33,15 +48,15 @@ class _GenerateQRPageState extends State<ListUsersPage> {
                 ),
                 model.filteredCards.isNotEmpty ||
                         model.searchController.text.isNotEmpty
-                    ? GridView.builder(
+                    ? ListView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 5,
-                          mainAxisSpacing: 5,
-                        ),
+                        // gridDelegate:
+                        //     const SliverGridDelegateWithFixedCrossAxisCount(
+                        //   crossAxisCount: 2,
+                        //   crossAxisSpacing: 5,
+                        //   mainAxisSpacing: 5,
+                        // ),
                         itemCount: model.filteredCards.length,
                         itemBuilder: (context, index) {
                           return ListTile(
@@ -49,7 +64,7 @@ class _GenerateQRPageState extends State<ListUsersPage> {
                               model.users[index].firstname!,
                             ),
                             subtitle: Text(
-                              model.users[index].attending!.toString(),
+                              model.users[index].uuid!.toString(),
                             ),
                           );
                         },
@@ -70,7 +85,7 @@ class _GenerateQRPageState extends State<ListUsersPage> {
                               model.users[index].firstname!,
                             ),
                             subtitle: Text(
-                              model.users[index].attending!.toString(),
+                              model.users[index].lastname!.toString(),
                             ),
                           );
                         },

@@ -16,18 +16,19 @@ class DispController extends ChangeNotifier{
 
   getUsers()async{
     users =  await _fService.getMembersCollection();
+    print("Number of registered people: ${users.length}");
     notifyListeners();
   }
 
-  searchForCard(String card) {
+  searchForCard() {
     filteredCards.clear();
-    if (card.isEmpty) {
+    if (searchController.text.isEmpty) {
       notifyListeners();
       return;
     }
 
     for (var element in users) {
-      if (element.id!.toLowerCase().contains(card)) {
+      if (element.id!.toLowerCase().contains(searchController.text)) {
         filteredCards.add(element);
       }
       notifyListeners();

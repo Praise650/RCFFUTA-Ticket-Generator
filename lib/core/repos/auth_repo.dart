@@ -1,21 +1,20 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:rcf_attendance_generator/core/service/auth_service.dart';
 
-import '../../app/locator.dart';
-import '../../utils/date_formatter.dart';
+import '../../core/service/navigator_service.dart';
+import '../../core/service/auth_service.dart';
 import '../errors/firebase_auth_error.dart';
 import '../service/firestore_service.dart';
+import '../../routes/app_routes.dart';
+import '../../app/locator.dart';
 
-class AuthRepo  implements AuthService{
+class AuthRepo implements AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final _fsService = locator<FireStoreService>();
+  final _navigationService = locator<NavigatorService>();
 
   @override
   Future<User?> login({String? email, String? password}) async {
     User? user;
-    //TODO: implement checking db for current user
-    final userDataCreated = await _fsService.checkUserIsCreated(user!.uid);
     try {
       if (email != null && password != null) {
         UserCredential userCredential = await _auth.signInWithEmailAndPassword(
@@ -23,23 +22,29 @@ class AuthRepo  implements AuthService{
           password: password,
         );
         user = userCredential.user;
-        if (user != null && userDataCreated == true) {
-          DateTime now = DateTime.now();
-            /// create array to save admin login session using setOptions on firebase
-            // final snapshot =
-            //     await firestoreService.collection('').doc(currentUser.uid).get();
-            // final saveTimeStamp =
-          Map<String, dynamic> jsonData = {
-            "timeStamp": FieldValue.arrayUnion(
-              [DateFormatter.dateFormatter(now)],
-            ),
-          };
-            await _fsService.uploadMemberInformation(jsonData, user.uid);
-            // if (snapshot.exists) {
-            //   print("Login successful");
-            //   // firestoreService.setUser(snapshot.data() as Map<String, dynamic>);
-            // }
-
+        if (user != null) {
+          print("Logging in: ${user.uid}");
+          final userDataCreated = await _fsService.checkToLogin(user.uid);
+          userDataCreated != null
+              ? _navigationService.navigateToDownloadQrPage(user.uid)
+              : _navigationService.navigateTo(AppRoutes.listUserPage);
+          print("Checking database for user");
+          /// create array to save admin login session using setOptions on firebase
+          // DateTime now = DateTime.now();
+          // final snapshot =
+          //     await firestoreService.collection('').doc(currentUser.uid).get();
+          // final saveTimeStamp =
+          // Map<String, dynamic> jsonData = {
+          //   "timeStamp": FieldValue.arrayUnion(
+          //     [DateFormatter.dateFormatter(now)],
+          //   ),
+          // };
+          //   await _fsService.uploadMemberInformation(jsonData, user.uid);
+          // if (snapshot.exists) {
+          //   print("Login successful");
+          //   // firestoreService.setUser(snapshot.data() as Map<String, dynamic>);
+          // }
+          print(user.email);
           return user;
         } else {
           throw Exception('Could not find user');
@@ -66,11 +71,15 @@ class AuthRepo  implements AuthService{
   }
 
   @override
-  Future<User?> register({String? email, String? password,}) async{
+  Future<User?> register({
+    String? email,
+    String? password,
+  }) async {
     User? user;
     try {
       if (email != null && password != null) {
-        UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
+        UserCredential userCredential =
+            await _auth.createUserWithEmailAndPassword(
           email: email,
           password: password,
         );
@@ -106,7 +115,7 @@ class AuthRepo  implements AuthService{
   }
 
   @override
-  Future<void> signOut() async{
+  Future<void> signOut() async {
     _auth.signOut();
     print("Signed Out");
   }

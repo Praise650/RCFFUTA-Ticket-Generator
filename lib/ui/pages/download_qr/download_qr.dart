@@ -6,25 +6,18 @@ import 'package:screenshot/screenshot.dart';
 import '../../widgets/download_ticket/infos_right_widget.dart';
 import '../../widgets/download_ticket/form_left_widget.dart';
 import 'package:rcf_attendance_generator/app/images.dart';
-import 'package:widgets_to_image/widgets_to_image.dart';
 import 'controller/download_qr_controller.dart';
 import 'package:provider/provider.dart';
 import '../../styles/color.dart';
 
-// import '../../../core/repos/download_qr_repo.dart';
-// import '../../../core/data/download_qr_datasource.dart';
-// import 'package:http/http.dart' as http;
-
-class DownloadQR extends StatefulWidget {
-  final String userId;
-
-  const DownloadQR({super.key, required this.userId});
+class DownloadQRPage extends StatefulWidget {
+  const DownloadQRPage({super.key});
 
   @override
-  State<DownloadQR> createState() => _DownloadQRState();
+  State<DownloadQRPage> createState() => _DownloadQRPageState();
 }
 
-class _DownloadQRState extends State<DownloadQR> {
+class _DownloadQRPageState extends State<DownloadQRPage> {
   @override
   void initState() {
     super.initState();
@@ -33,7 +26,8 @@ class _DownloadQRState extends State<DownloadQR> {
 
   _init() async {
     try {
-      await context.read<DownloadQrController>().getProfile(widget.userId);
+      final userId = ModalRoute.of(context)!.settings.arguments as String;
+      await context.read<DownloadQrController>().getProfile(userId);
     } catch (e) {
       print(e);
       // Messenger.error(e.message);

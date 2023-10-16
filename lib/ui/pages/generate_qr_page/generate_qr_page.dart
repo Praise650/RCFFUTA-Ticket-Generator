@@ -13,7 +13,7 @@ class GenerateQRPage extends StatefulWidget {
   const GenerateQRPage({Key? key}) : super(key: key);
 
   @override
-  _GenerateQRPageState createState() => _GenerateQRPageState();
+  State<GenerateQRPage> createState() => _GenerateQRPageState();
 }
 
 class _GenerateQRPageState extends State<GenerateQRPage> {
@@ -87,10 +87,10 @@ class _GenerateQRPageState extends State<GenerateQRPage> {
                                 builder: (context) => const LoginPage()));
                       },
                       iconColor: AppColors.white,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: const Text(
-                          'Login as Admin',
+                      child: const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          'Login',
                           style: TextStyle(
                             color: Colors.white,
                           ),

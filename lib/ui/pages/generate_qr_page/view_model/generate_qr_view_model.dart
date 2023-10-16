@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:rcf_attendance_generator/core/service/navigator_service.dart';
 
 import '../../../../core/models/personal_data.dart';
 import '../../../../core/service/firestore_service.dart';
@@ -11,6 +12,7 @@ import '../../../../app/locator.dart';
 class GenerateQrViewModel extends ChangeNotifier {
   final _authService = locator<AuthService>();
   final _fService = locator<FireStoreService>();
+  final _navigatorService = locator<NavigatorService>();
   late User? user;
   TextEditingController firstname = TextEditingController();
   TextEditingController lastname = TextEditingController();
@@ -62,14 +64,7 @@ class GenerateQrViewModel extends ChangeNotifier {
           _fService
               .uploadMemberInformation(_personalDataForm.toJson(), user?.uid)
               .then(
-                (value) => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DownloadQR(
-                      userId: user!.uid,
-                    ),
-                  ),
-                ),
+                (value) => _navigatorService.navigateToDownloadQrPage(user!.uid),
               );
         }
         // _userRepo.createUser(toJson,context);

@@ -11,7 +11,7 @@ class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
   @override
-  _GenerateQRPageState createState() => _GenerateQRPageState();
+  State<LoginPage> createState() => _GenerateQRPageState();
 }
 
 class _GenerateQRPageState extends State<LoginPage> {
@@ -42,9 +42,9 @@ class _GenerateQRPageState extends State<LoginPage> {
                       isBusy: model.isLoading,
                       // width: 100,
                       onPressed: () {
-                        model.createAndSaveUser(context);
+                        model.createAndSaveUser();
                       },
-                      icon: Icons.east_outlined,
+                      btnText: 'Login',
                       iconColor: AppColors.white,
                     ),
                     const SizedBox(height: 10),

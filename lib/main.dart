@@ -1,12 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:rcf_attendance_generator/app/locator.dart';
+import 'package:rcf_attendance_generator/core/service/navigator_service.dart';
+import 'package:rcf_attendance_generator/routes/app_routes.dart';
 
 import 'ui/pages/auth/view_model/login_controller.dart';
 import 'ui/pages/display_attendee/view_model/list_member_controller.dart';
 import 'ui/pages/download_qr/controller/download_qr_controller.dart';
 import 'ui/pages/generate_qr_page/view_model/generate_qr_view_model.dart';
-import 'ui/pages/generate_qr_page/generate_qr_page.dart';
 import 'app/app.dart';
 
 void main() async {
@@ -20,7 +22,7 @@ class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  _MyAppState createState() => _MyAppState();
+  State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
@@ -55,10 +57,13 @@ class _MyAppState extends State<MyApp> {
               ChangeNotifierProvider(create: (_) => AuthViewModel()),
               ChangeNotifierProvider(create: (_) => DispController()),
             ],
-            child: const MaterialApp(
+            child: MaterialApp(
               // builder: (context,snaps){},
-              home: GenerateQRPage(),
+              // home: GenerateQRPage(),
+              initialRoute: AppRoutes.generateQrPage,
               debugShowCheckedModeBanner: false,
+              navigatorKey: locator<NavigatorService>().navigatorKey,
+              routes: AppRoutes.routes,
             ),
           );
         }

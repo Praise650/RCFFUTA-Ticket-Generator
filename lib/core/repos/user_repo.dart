@@ -60,6 +60,26 @@ class UserRepo implements FireStoreService {
   }
 
   @override
+  Future<PersonalDataForm?> checkToLogin(String userId) async {
+    final currentUser = await _membersCollection.doc(userId).get();
+    if (currentUser.exists) {
+      final decodedData = currentUser.data();
+      return PersonalDataForm.fromJson(decodedData!);
+      // showDialog(
+      //   context: context,
+      //   builder: (context) => const FlutterSuccessfulDialog(
+      //     title: "Successful",
+      //     subtitle: "Your details have been save successfully",
+      //     routeDes: SiteLayout(),
+      //   ),
+      // );
+    } else {
+      return null;
+      // throw Exception('Could not fetch user');
+    }
+  }
+
+  @override
   Future<void> uploadMemberInformation(
       Map<String, dynamic> jsonData, uid) async {
     await _fsInstance.collection(membersCollectionPath).doc(uid).set(jsonData);
@@ -71,6 +91,11 @@ class UserRepo implements FireStoreService {
   @override
   Future<bool> checkUserIsCreated(String userId) async {
     var createdMember = await _membersCollection.doc(userId).get();
+    return createdMember.data()!.isEmpty ? false : true;
+  }
+  @override
+  Future<bool> checkAdminIsCreated(String userId) async {
+    var createdMember = await _adminCollection.doc(userId).get();
     return createdMember.data()!.isEmpty ? false : true;
   }
 

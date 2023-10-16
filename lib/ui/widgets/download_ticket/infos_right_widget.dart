@@ -45,22 +45,19 @@ class InfosRight extends StatelessWidget {
                 return Column(
                   children: [
                     ClipRRect(
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(63),
-                        ),
-                        child: controller.user?.imageUrl == null
-                            ? Image.asset(
-                                'assets/images/img_avatar.png',
-                          height: 50,
-                          width: 50,
-                              )
-                            : Image.network(
-                                controller.user!.imageUrl!,
-                                fit: BoxFit.cover,
-                          height: 50,
-                          width: 50,
-                              ),
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(63),
                       ),
+                      child: controller.user?.imageUrl == null
+                          ? Image.asset('assets/images/img_avatar.png',
+                              height: 50, width: 50)
+                          : Image.network(
+                              controller.user!.imageUrl!,
+                              fit: BoxFit.cover,
+                              height: 50,
+                              width: 50,
+                            ),
+                    ),
                     const SizedBox(height: 16),
                     Text(
                       'ATTENDEE',
@@ -71,25 +68,25 @@ class InfosRight extends StatelessWidget {
                       ),
                     ),
                     Text(
-                        controller.user?.fullname == null
-                            ? 'Your name here'
-                            : controller.user!.fullname!,
-                        style: GoogleFonts.spaceGrotesk(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w700,
-                          color: AppColors.greyDark,
-                        ),
+                      controller.user?.fullname == null
+                          ? 'Your name here'
+                          : controller.user!.fullname!,
+                      style: GoogleFonts.spaceGrotesk(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                        color: AppColors.greyDark,
                       ),
+                    ),
                     Text(
-                        controller.user?.id == null
-                            ? 'Your ID here'
-                            : controller.user!.id!,
-                        style: GoogleFonts.spaceGrotesk(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w700,
-                          color: AppColors.greyDark,
-                        ),
+                      controller.user?.id == null
+                          ? 'Your ID here'
+                          : controller.user!.id!,
+                      style: GoogleFonts.spaceGrotesk(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                        color: AppColors.greyDark,
                       ),
+                    ),
                     const Expanded(child: SizedBox()),
                     Column(
                       children: [
