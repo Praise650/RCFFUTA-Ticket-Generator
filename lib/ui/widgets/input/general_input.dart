@@ -63,7 +63,7 @@ class _GeneralInputState extends State<GeneralInput> {
 
   @override
   void dispose() {
-    _controller.dispose();
+    // _controller.dispose();
     _focusNode.dispose();
     super.dispose();
   }

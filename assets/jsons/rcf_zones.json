@@ -1,0 +1,534 @@
+{
+  "code": "01",
+  "message": "Successful",
+  "data":[
+    {
+      "zone": "ABUJA ZONE",
+      "institutions": [
+        {
+          "fellowshipName": "RCF UNIVERSITY  OF ABUJA MAIN CAMPUS AIRPORT ROAD ABUJA",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF UNIVERSITY  OF ABUJA MINI CAMPUS GWAGWALADA",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF FEDERAL  UNIVERSITY MINNA GIDAN KWANO CAMPUS MINNA, NIGER STATE",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF FEDERAL UNIVERSITY  MINNA BOSSO CAMPUS MINNA, NIGER STATE",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF FEDERAL POLYTECHNIC BIDA, NIGER STATE",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF NASARAWA STATE UNIVERSITY, KEFFI, NASARAWA STATE",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF FEDERAL POLYTECHNIC NASARAWA  TOWN, NASARAWA STATE",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF FEDERAL UNIVERSITY LAFIA, NASARAWA  STATE",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF COLLEGE OF EDUCATION ZUBA FCT, ABUJA",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF COLLEGE OF EDUCATION  MINNA",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF COLLEGE OF EDUCATION  KOTONGORA",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCCF KUBWA CHAPTER  FCT, ABUJA",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCCF LIFE CAMP CHAPTER FCT, ABUJA",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCCF MINNA CHAPTER, NIGER STATE",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCCF BIDA CHAPTER, NIGER STATE",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF IBRAHIM BABANGIDA UNIVERSITY LAPAI, NIGER STATE",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCCF SULEJA, NIGER STATE",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCCF KEFFI, NASARAWA  STATE",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCCF LAFIA, NASARAWA STATE",
+          "schoolName": null
+        }
+      ]
+    },
+    {
+      "zone": "KOGI ZONE",
+      "institutions": [
+        {
+          "fellowshipName": "KOGI STATE UNIVERSITY, ANYIGBA",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "FEDERAL UNIVERSITY, LOKOJA",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "KOGI STATE POLYTECHNIC, LOKOJA",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "FEDERAL COLLEGE OF EDUCATION, OKENE",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "KOGI STATE COLLEGE OF EDUCATION ANKPA",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "KOGI STATE COLLEGE OF HEALTH SCIENCES AND TECHNOLOGY, IDAH",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "FEDERAL POLYTECHNIC, IDAH",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "CONFLUENCE UNIVERSITY OF SCIENCE AND TECHNOLOGY, OSARA",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "KOGI STATE SCHOOL OF ENGINEERING, ITAPE",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "REDEEMED CHRISTIAN CORPER’S FELLOWSHIP, LOKOJA",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "REDEEMED CHRISTIAN CORPER’S FELLOWSHIP, KABBA",
+          "schoolName": null
+        }
+      ]
+    },
+    {
+      "zone": "IMO ZONE",
+      "institutions": [
+        {
+          "fellowshipName": "RCF FEDERAL POLYTECHNIC NEKEDE",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF ALVAN IKOKU COLLEGE OF EDUCATION, OWERRI",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF FEDERAL COLLEGE OF LAND AND RESOURCES, OFOROLA",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF FEDERAL UNIVERSITY OF TECHNOLOGY, OWERRI",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF IMO STATE POLYTECHNIC, UMUAGWU",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF IMO STATE UNIVERSITY OF TEACHING HOSPITAL, ORLU",
+          "schoolName": null
+        }
+      ]
+    },
+    {
+      "zone": "KADUNA/KASTINA ZONE",
+      "institutions": [
+        {
+          "fellowshipName": "THE REDEEMED CHRISTIAN CORPER’S FELLOWSHIP, KADUNA FAMILY HOUSE",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "THE REDEEMED CHRISTIAN CORPER’S FELLOWSHIP, KASTINA FAMILY HOUSE",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "THE REDEEMED CHRISTIAN CORPER’S FELLOWSHIP, DAURA FAMILY HOUSE",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "THE REDEEMED CHRISTIAN CORPER’S FELLOWSHIP, MASHI FAMILY HOUSE",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "THE REDEEMED CHRISTIAN FELLOWSHIP, ABU ZARIA, KADUNA STATE",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "THE REDEEMED CHRISTIAN FELLOWSHIP, KADUNA POLYTECHNIC, KADUNA STATE",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "THE REDEEMED CHRISTIAN FELLOWSHIP, KADUNA STATE UNIVERSITY, KADUNA STATE",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "THE REDEEMED CHRISTIAN FELLOWSHIP, NUHU BAMALI POLYTECHNIC, MAIN CAMPUS, ZARIA, KADUNA STATE",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "THE REDEEMED CHRISTIAN FELLOWSHIP, NUHU BAMALI POLYTECHNIC, ANNEX CAMPUS, ZARIA, KADUNA STATE",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "THE REDEEMED CHRISTIAN FELLOWSHIP, HASSAN USMAN KASTINA POLYTECHNIC, KASTINA STATE",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "THE REDEEMED CHRISTIAN FELLOWSHIP, FEDERAL UNIVERSITY DUSTINMA, KASTINA STATE",
+          "schoolName": null
+        }
+      ]
+    },
+    {
+      "zone": "BENIN REPUBLIC/WEST COAST  ZONE",
+      "institutions": [
+        {
+          "fellowshipName": "RCF WEST AFRICAN UNION UNIVERSITY, BENIN REPUBLIC",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF HOUDEGBE NORTH AMERICAN UNIVERSITY, BENIN REPUBLIC",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF ECOLE PROFESSIONELLE SPECIALISEE LA CITE, BENIN REPUBLIC",
+          "schoolName": null
+        }
+      ]
+    },
+    {
+      "zone": "AKWA IBOM ZONE",
+      "institutions": [
+        {
+          "fellowshipName": "UNIVERSITY OF UYO",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "AKWA IBOM STATE UNIVERSITY",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "AKWA IBOM STATE POLYTECHNIC",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "HERITAGE POLYTECHNIC (PIONEERING)",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCCF UYO",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCCF IKOT EPENE",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCCF EKET",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCCF ORON",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCCF ABAK",
+          "schoolName": null
+        }
+      ]
+    },
+    {
+      "zone": "BENUE ZONE",
+      "institutions": [
+        {
+          "fellowshipName": "RCF JOSUAM",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF BENUE STATE UNIVERSITY",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF COLLEGE OF EDUCATION KASTINA ALA",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF UGBOKOLO",
+          "schoolName": null
+        }
+      ]
+    },
+    {
+      "zone": "BORNO ZONE",
+      "institutions": [
+        {
+          "fellowshipName": "RCCF BORNO",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCCF DAMATURU",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF UNIMAID",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF FEDERAL POLYTECHNIC DAMATURU",
+          "schoolName": null
+        }
+      ]
+    },
+    {
+      "zone": "CALABAR ZONE",
+      "institutions": [
+        {
+          "fellowshipName": "RCF UNIVERSITY OF CALABAR, CALABAR",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF CROSS RIVER STATE UNIVERSITY, OGOJA CAMPUS",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF CROSS RIVER STATE UNIVERSITY, OKUKU CAMPUS",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF CROSS RIVER STATE UNIVERSITY, CALABAR CAMPUS",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF CROSS RIVER STATE UNIVERSITY, OBUBRA CAMPUS",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF MARY SLESSOR COLLEGE OF HEALTH CALABAR",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF FEDERAL COLLEGE OF EDUCATION, OBUDU",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCCF OBUDU",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCCF CALABAR",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCCF IKOM",
+          "schoolName": null
+        }
+      ]
+    },
+    {
+      "zone": "EDO ZONE",
+      "institutions": [
+        {
+          "fellowshipName": "RCF UNIVERSITY OF BENIN UGBOWO CAMPUS",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF UNIVERSITY OF BENIN EKEHUAN CAMPUS",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF FEDERAL POLY AUCHI",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF AMBROSE ALLI UNIVERSITY EKPOMA",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF IGBINEDION UNIVERSITY OKADA",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF EDO STATE POLY USEN",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCCF BENIN CITY",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCCF OKADA",
+          "schoolName": null
+        }
+      ]
+    },
+    {
+      "zone": "OSUN ZONE",
+      "institutions": [
+        {
+          "fellowshipName": "RCF OSUN STATE UNIVERSITY OSOGBO",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF OSUN STATE UNIVERSITY IKIRE",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF OSUN STAE UNIVERSITY OKUKU",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF OSUN STATE UNIVERSITY IFETEDO",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF OBAFEMI AWOLOWO UNIVERSITY",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF ODUDUWA UNIVERSITY IPETUMODU",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF OSUN STATE COLLEGE OF EDUCATION ILESA",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF OSUN STATE COLLEGE OF HEALTH ILESA",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF OSUN STATE COLLEGE OF TECH ESA OKE",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF FEDERAL POLYTECHNIC EDE",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF INTERLINK POLYTECHNIC IJEBU",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF OSUN STATE COLLEGE OF EDUCATION ILA-ORAGUN",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCCF OSOGBO",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCCF IFON",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF OSUN STATE POLY IREE (OKE-GLO)",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF OSUN STATE POLY IREE (OFF-CAMPUS)",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF OSUN STATE POLY IREE (BIG LONDON)",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF OSUN STATE POLY IREE (ADA)",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF OSUN STATE POLY IRRE (KIDVARC)",
+          "schoolName": null
+        }
+      ]
+    },
+    {
+      "zone": "KWARA ZONE",
+      "institutions": [
+        {
+          "fellowshipName": "RCF UNIVERSITY OF ILORIN",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF KWARA STATE UNIVERSITY MALETE",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF UNIVERSITY OF ILORIN TEACHING HOSPITALS",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF KWARA STATE POLYTECHNIC ILORIN",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCF KWARA STATE COLLEGE OF HEALTH TECHNOLOGY OFFA",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCCF UNILORIN",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCCF MALETE",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCCF OKE-ODE",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCCF OFFA",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCCF ILORIN POLY (MOUNTAIN OF POWER)",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCCF ILORIN POLY (UPCOMERS)",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCCF ILORIN POLY (HILLTOP CONGREGATION)",
+          "schoolName": null
+        },
+        {
+          "fellowshipName": "RCCF OFFA POLY (HIGH TENSION CONGREGATION)",
+          "schoolName": null
+        }
+      ]
+    }
+  ]
+}

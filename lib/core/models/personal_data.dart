@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'zone_model.dart';
+
 class PersonalDataForm {
 
   final String? fullname;
@@ -8,7 +10,9 @@ class PersonalDataForm {
   final String? email;
   final String? phoneNumber;
   final String? gender;
+  // final Institution? zone;
   final String? zone;
+  final String? fellowshipName;
   final String? unit;
   final String? workerOrExec;
   final String? portfolio;
@@ -29,6 +33,7 @@ class PersonalDataForm {
     this.phoneNumber,
     this.gender,
     this.zone,
+    this.fellowshipName,
     this.unit,
     this.workerOrExec,
     this.portfolio,
@@ -51,6 +56,7 @@ class PersonalDataForm {
         phoneNumber: json["phoneNumber"],
         gender: json["gender"],
         zone: json["zone"],
+        fellowshipName: json['fellowshipName'],
         unit: json["unit"],
         workerOrExec: json["workerOrExec"],
         portfolio: json['portfolio'],
@@ -77,6 +83,7 @@ class PersonalDataForm {
         'phoneNumber': phoneNumber,
         'gender':gender,
         'zone':zone,
+        'fellowshipName':fellowshipName,
         'unit':unit,
         'workerOrExec':workerOrExec,
         'portfolio':portfolio,
