@@ -8,6 +8,8 @@ import '../styles/dimens.dart';
 import '../styles/texts.dart';
 
 class CustomInstitutionDropdown extends StatefulWidget {
+  final Function(String?) onChanged;
+
   CustomInstitutionDropdown(
       {super.key,
       this.label,
@@ -16,7 +18,7 @@ class CustomInstitutionDropdown extends StatefulWidget {
       this.autoUnFocus = false,
       required this.appContext,
       this.hintText,
-      this.fillColor, this.selectedInstitution, required this.value});
+      this.fillColor, this.selectedInstitution, required this.value, required this.onChanged});
   final String? label;
   final String? hintText;
   final FocusNode? focusNode;
@@ -95,7 +97,7 @@ class _CustomInstitutionDropdownState extends State<CustomInstitutionDropdown> {
                 : widget.margin,
             decoration: BoxDecoration(
               color: _focusNode.hasFocus ||
-                      widget.value.isDefinedAndNotNull
+                      widget.value.isNotEmpty
                   ? AppColors.fieldColor
                   : widget.fillColor,
               borderRadius: BorderRadius.circular(Dimens.inputFieldRadius),
@@ -113,16 +115,12 @@ class _CustomInstitutionDropdownState extends State<CustomInstitutionDropdown> {
                     underline: const SizedBox.shrink(),
                     isExpanded: true,
                     hint: Text(widget.hintText.toString()),
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        widget.selectedInstitution = newValue;
-                      });
-                    },
+                    onChanged: widget.onChanged,
                     items: widget.value
                         .map<DropdownMenuItem<String>>((Institution value) {
                       return DropdownMenuItem<String>(
                         value: value.fellowshipName,
-                        child: Text(value.institutions ?? ''),
+                        child: Text(value.fellowshipName ?? ''),
                       );
                     }).toList(),
                   ),

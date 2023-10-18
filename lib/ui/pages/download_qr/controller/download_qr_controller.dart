@@ -1,30 +1,27 @@
-import 'dart:io';
+import 'package:rcf_attendance_generator/routes/app_routes.dart';
+import 'package:universal_html/html.dart' as html;
 import 'dart:js_interop';
 import 'dart:typed_data';
-import 'package:http/http.dart'as http;
 
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:screenshot/screenshot.dart';
 
 import '../../../../app/locator.dart';
 import '../../../../core/models/personal_data.dart';
 import '../../../../core/service/firestore_service.dart';
+import '../../../../core/service/navigator_service.dart';
 import '../../../../core/states/ticket_state.dart';
 
 class DownloadQrController extends ChangeNotifier {
   final _fService = locator<FireStoreService>();
+  final _navigationService = locator<NavigatorService>();
 
-  // WidgetsToImageController to access widget
-  // GlobalKey globalKey = GlobalKey();
-  // WidgetsToImageController convertToImage = WidgetsToImageController();
-  // to save image bytes of widget
   Uint8List? bytes;
   //Create an instance of ScreenshotController
   ScreenshotController screenshotController = ScreenshotController();
 
-  late PersonalDataForm? user;
+  PersonalDataForm? user;
   ITicketState state = ITicketState();
 
   Future<void> getProfile(userId) async {
@@ -34,45 +31,50 @@ class DownloadQrController extends ChangeNotifier {
     user.isDefinedAndNotNull
         ? state = SuccessTicketState()
         : state = FailureTicketState();
-    // userController.text = '';
     notifyListeners();
   }
 
   Future<void> downloadTicket() async {
+    // getPdf(bytes!);
     bytes = await screenshotController.capture();
     notifyListeners();
-    // getPdf(bytes!);
     String resUrl = await uploadImage(bytes!,user!.uuid!);
-    final islandRef = FirebaseStorage.instance.ref().child("Folder/${user!.uuid}");
+    html.AnchorElement anchorElement = html.AnchorElement(href: resUrl);
+    anchorElement.download = "Tickets/Doc2023${user!.uuid}";
+    anchorElement.click();
+    _navigationService.replace(AppRoutes.generateQrPage);
 
-    final appDocDir = await getApplicationDocumentsDirectory();
-    final filePath = "${appDocDir.path}/ticket${islandRef.name}";
-    final file = File(filePath);
+    // final islandRef = FirebaseStorage.instance.ref().child("Folder/${user!.uuid}");
+    // final appDocDir = await getApplicationDocumentsDirectory();
+    // final filePath = "${appDocDir.path}/ticket${islandRef.name}";
+    // final file = io.File(filePath);
 
-    final downloadTask = islandRef.writeToFile(file);
-    downloadTask.snapshotEvents.listen((taskSnapshot) {
-      switch (taskSnapshot.state) {
-        case TaskState.running:
-        // TODO: Handle this case.
-          break;
-        case TaskState.paused:
-        // TODO: Handle this case.
-          break;
-        case TaskState.success:
-        // TODO: Handle this case.
-          break;
-        case TaskState.canceled:
-        // TODO: Handle this case.
-          break;
-        case TaskState.error:
-        // TODO: Handle this case.
-          break;
-      }
-    });
+    // final downloadTask = islandRef.writeToFile(file);
+    // downloadTask.snapshotEvents.listen((taskSnapshot) {
+    //   switch (taskSnapshot.state) {
+    //     case TaskState.running:
+    //     // TODO: Handle this case.
+    //       break;
+    //     case TaskState.paused:
+    //     // TODO: Handle this case.
+    //       break;
+    //     case TaskState.success:
+    //     // TODO: Handle this case.
+    //       break;
+    //     case TaskState.canceled:
+    //     // TODO: Handle this case.
+    //       break;
+    //     case TaskState.error:
+    //     // TODO: Handle this case.
+    //       break;
+    //   }
+    // });
   }
 
 
-  File createFileFromBytes(Uint8List bytes) => File.fromRawPath(bytes);
+  ///convert bytes to file
+  // io.File createFileFromBytes(Uint8List bytes) => io.File.fromRawPath(bytes);
+
   // Future uploadImageToFirebase(File value,String userID) async {
   //   String fileName = value.path;
   //   final storageRef = FirebaseStorage.instance.ref('uploads');
@@ -115,13 +117,13 @@ class DownloadQrController extends ChangeNotifier {
   //   print(output.path);
   // }
 
-  Future<String> uploadImage(Uint8List xfile,String id) async {
+  Future<String> uploadImage(Uint8List file,String id) async {
 
-    Reference ref = FirebaseStorage.instance.ref().child('Folder');
-    ref = ref.child(id);
+    Reference ref = FirebaseStorage.instance.ref().child('Tickets');
+    ref = ref.child("Doc2023$id");
 
     UploadTask uploadTask = ref.putData(
-      xfile,
+      file,
       SettableMetadata(contentType: 'image/png'),
     );
     TaskSnapshot snapshot = await uploadTask;

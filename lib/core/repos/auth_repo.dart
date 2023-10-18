@@ -2,9 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../core/service/navigator_service.dart';
 import '../../core/service/auth_service.dart';
-import '../errors/firebase_auth_error.dart';
-import '../service/firestore_service.dart';
 import '../../routes/app_routes.dart';
+import '../errors/firebase_auth_error.dart';
+import '../models/personal_data.dart';
+import '../service/firestore_service.dart';
 import '../../app/locator.dart';
 
 class AuthRepo implements AuthService {
@@ -13,7 +14,7 @@ class AuthRepo implements AuthService {
   final _navigationService = locator<NavigatorService>();
 
   @override
-  Future<User?> login({String? email, String? password}) async {
+  Future<PersonalDataForm?> login({String? email, String? password}) async {
     User? user;
     try {
       if (email != null && password != null) {
@@ -23,29 +24,15 @@ class AuthRepo implements AuthService {
         );
         user = userCredential.user;
         if (user != null) {
-          print("Logging in: ${user.uid}");
+          print("Logging in: ${user.uid} and ${user.email}");
           final userDataCreated = await _fsService.checkToLogin(user.uid);
-          userDataCreated != null
-              ? _navigationService.navigateToDownloadQrPage(user.uid)
-              : _navigationService.navigateTo(AppRoutes.listUserPage);
-          print("Checking database for user");
-          /// create array to save admin login session using setOptions on firebase
-          // DateTime now = DateTime.now();
-          // final snapshot =
-          //     await firestoreService.collection('').doc(currentUser.uid).get();
-          // final saveTimeStamp =
-          // Map<String, dynamic> jsonData = {
-          //   "timeStamp": FieldValue.arrayUnion(
-          //     [DateFormatter.dateFormatter(now)],
-          //   ),
-          // };
-          //   await _fsService.uploadMemberInformation(jsonData, user.uid);
-          // if (snapshot.exists) {
-          //   print("Login successful");
-          //   // firestoreService.setUser(snapshot.data() as Map<String, dynamic>);
-          // }
-          print(user.email);
-          return user;
+          print(userDataCreated.toString());
+          if (userDataCreated != null && userDataCreated.id == user.uid) {
+            print(userDataCreated.email);
+            return userDataCreated;
+          } else {
+            print('Could not find user');
+          }
         } else {
           throw Exception('Could not find user');
         }
@@ -67,7 +54,63 @@ class AuthRepo implements AuthService {
     } catch (e) {
       print(e);
     }
-    return user;
+    return null;
+  }
+
+  @override
+  Future<PersonalDataForm?> loginAsAdmin(
+      {String? email, String? password}) async {
+    User? user;
+    try {
+      if (email != null && password != null) {
+        UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+          email: email,
+          password: password,
+        );
+        user = userCredential.user;
+        if (user != null) {
+          print("Logging in: ${user.uid}");
+          final userDataCreated = await _fsService.checkAdminToLogin(user.uid);
+          _navigationService.replace(AppRoutes.listUserPage);
+          /// create array to save admin login session using setOptions on firebase
+          // DateTime now = DateTime.now();
+          // final snapshot =
+          //     await firestoreService.collection('').doc(currentUser.uid).get();
+          // final saveTimeStamp =
+          // Map<String, dynamic> jsonData = {
+          //   "timeStamp": FieldValue.arrayUnion(
+          //     [DateFormatter.dateFormatter(now)],
+          //   ),
+          // };
+          //   await _fsService.uploadMemberInformation(jsonData, user.uid);
+          // if (snapshot.exists) {
+          //   print("Login successful");
+          //   // firestoreService.setUser(snapshot.data() as Map<String, dynamic>);
+          // }
+          print(userDataCreated!.email);
+          return userDataCreated;
+        } else {
+          throw Exception('Could not find user');
+        }
+      }
+    } on FirebaseAuthError catch (e) {
+      if (e.code == 'weak-password') {
+        print('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        print('The account already exists for that email.');
+      } else if (e.code == 'user-not-found') {
+        throw ('There is no user record corresponding to the email entered.');
+      } else if (e.code == 'invalid-email') {
+        throw ('The email address is badly formatted!');
+      } else if (e.code == "network-request-failed") {
+        throw ('The password provided is too weak.');
+      } else if (e.code == "wrong-password") {
+        throw ('The password provided is incorrect.');
+      }
+    } catch (e) {
+      print(e);
+    }
+    return null;
   }
 
   @override

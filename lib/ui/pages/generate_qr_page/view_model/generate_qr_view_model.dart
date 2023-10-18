@@ -1,5 +1,3 @@
-import 'dart:js_interop';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:rcf_attendance_generator/core/service/navigator_service.dart';
@@ -12,6 +10,7 @@ import '../../../../core/service/auth_service.dart';
 import '../../../../core/states/ticket_state.dart';
 import '../../../../utils/id_generator.dart';
 import '../../../../app/locator.dart';
+import '../../download_qr/download_qr.dart';
 
 class GenerateQrViewModel extends ChangeNotifier {
   final _authService = locator<AuthService>();
@@ -29,7 +28,6 @@ class GenerateQrViewModel extends ChangeNotifier {
   TextEditingController email = TextEditingController();
   TextEditingController phoneNumber = TextEditingController();
   String? gender = 'Male';
-  TextEditingController zone = TextEditingController();
   TextEditingController unit = TextEditingController();
   TextEditingController workerOrExec = TextEditingController();
   TextEditingController portfolio = TextEditingController();
@@ -66,8 +64,8 @@ class GenerateQrViewModel extends ChangeNotifier {
       notifyListeners();
       try {
         user = await _authService.register(
-            email: email.text, password: lastname.text);
-        PersonalDataForm _personalDataForm = PersonalDataForm(
+            email: email.text, password: phoneNumber.text);
+        PersonalDataForm personalDataForm = PersonalDataForm(
           id: user!.uid,
           fullname: ("${lastname.text} ${firstname.text}").toString(),
           lastname: lastname.text,
@@ -75,7 +73,8 @@ class GenerateQrViewModel extends ChangeNotifier {
           email: email.text,
           phoneNumber: phoneNumber.text,
           gender: gender,
-          // zone: zone.text,
+          zone: selectedRcfZone!.zone,
+          fellowshipName: selectedInstitution,
           unit: unit.text,
           workerOrExec: workerOrExec.text,
           portfolio: portfolio.text,
@@ -86,13 +85,19 @@ class GenerateQrViewModel extends ChangeNotifier {
           attending: false,
         );
         notifyListeners();
-        print("PersonalDataForm: ${_personalDataForm.toJson()}");
+        print("PersonalDataForm: ${personalDataForm.toJson()}");
         if (user != null) {
           _fService
-              .uploadMemberInformation(_personalDataForm.toJson(), user?.uid)
+              .uploadMemberInformation(personalDataForm.toJson(), user?.uid)
               .then(
-                (value) =>
-                    _navigatorService.navigateToDownloadQrPage(user!.uid),
+                (value) =>Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DownloadQRPage(
+                      userId: user!.uid.toString(),
+                    ),
+                  ),
+                ),
               );
         }
         // _userRepo.createUser(toJson,context);
@@ -123,7 +128,7 @@ class GenerateQrViewModel extends ChangeNotifier {
     state = LoadingTicketState();
     notifyListeners();
     institutionList = selectedRcfZone!.institutions!;
-    for(var newVal in institutionList) {
+    for (var newVal in institutionList) {
       print("Institution List: ${newVal.fellowshipName}");
     }
     institutionList.isNotEmpty

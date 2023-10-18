@@ -4,16 +4,6 @@ import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
 
-/// Default [FirebaseOptions] for use with your Firebase apps.
-///
-/// Example:
-/// ```dart
-/// import 'firebase_options.dart';
-/// // ...
-/// await Firebase.initializeApp(
-///   options: DefaultFirebaseOptions.currentPlatform,
-/// );
-/// ```
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
@@ -54,30 +44,12 @@ class DefaultFirebaseOptions {
 
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: "AIzaSyB7N32X4q2EeB7Wyg-MhJwPX3drtPD4BLg",
-    appId: "1:1064974951310:web:0ffeef6b8bbb502a1cbadf",
-    messagingSenderId: "1064974951310",
-    projectId: "crm-ondo-db",
-    authDomain: "crm-ondo-db.firebaseapp.com",
-    storageBucket: "crm-ondo-db.appspot.com",
-    measurementId: "G-DLELVWPBZR",
+      apiKey: "AIzaSyB7N32X4q2EeB7Wyg-MhJwPX3drtPD4BLg",
+      authDomain: "crm-ondo-db.firebaseapp.com",
+      projectId: "crm-ondo-db",
+      storageBucket: "crm-ondo-db.appspot.com",
+      messagingSenderId: "1064974951310",
+      appId: "1:1064974951310:web:b7adf0adaa5e98591cbadf",
+      measurementId: "G-PDKQN9MPXG"
   );
-
-  // static const FirebaseOptions android = FirebaseOptions(
-  //   apiKey: 'AIzaSyBgSqBo035ZvCtMx7evPVpiNqpNKAbs57U',
-  //   appId: '1:240358778486:android:05c9d2a1f9c3c307dfa157',
-  //   messagingSenderId: '240358778486',
-  //   projectId: 'unixp-7077e',
-  //   storageBucket: 'unixp-7077e.appspot.com',
-  // );
-  //
-  // static const FirebaseOptions ios = FirebaseOptions(
-  //   apiKey: 'AIzaSyBqLbF1IWuXkTp2GYcl-gXXXMaeYVLMYcA',
-  //   appId: '1:240358778486:ios:721a80b6f52140e9dfa157',
-  //   messagingSenderId: '240358778486',
-  //   projectId: 'unixp-7077e',
-  //   storageBucket: 'unixp-7077e.appspot.com',
-  //   iosClientId: '240358778486-gf9pha6guojqf9aq2k4o1o3diodhtl5t.apps.googleusercontent.com',
-  //   iosBundleId: 'com.example.onboardingScreens',
-  // );
 }

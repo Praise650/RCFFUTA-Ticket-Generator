@@ -7,7 +7,7 @@ class AppRoutes {
   static const String generateQrPage = '/generate_qr_page';
   static const String logInPage = '/log_in_screen';
   static const String listUserPage = '/list_user_page';
-  static const String downloadQrPage = '/download_qr_page';
+  // static const String downloadQrPage = '/download_qr_page';
   static const String homeScreen = '/home_screen';
   static const String dashboard = '/dashboard-screen';
   static const String appNavigationScreen = '/app_navigation_screen';
@@ -17,7 +17,7 @@ class AppRoutes {
     generateQrPage: (context) => const GenerateQRPage(),
     logInPage: (context) => const LoginPage(),
     listUserPage: (context) => const ListUsersPage(),
-    downloadQrPage: (context) => const DownloadQRPage(),
+    // downloadQrPage: (context) => const DownloadQRPage(userId: '',),
     // appNavigationScreen: (context) => AppNavigationScreen()
   };
 }

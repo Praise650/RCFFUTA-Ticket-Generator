@@ -1,7 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
-import 'zone_model.dart';
-
 class PersonalDataForm {
 
   final String? fullname;
@@ -48,23 +44,23 @@ class PersonalDataForm {
 
   factory PersonalDataForm.fromJson(Map<String, dynamic> json) =>
       PersonalDataForm(
-        id: json["id"] as String,
-        fullname: (json["fullname"]) as String,
-        firstname: json["firstname"],
-        lastname: json["lastname"],
-        email: json["email"],
-        phoneNumber: json["phoneNumber"],
-        gender: json["gender"],
-        zone: json["zone"],
-        fellowshipName: json['fellowshipName'],
-        unit: json["unit"],
-        workerOrExec: json["workerOrExec"],
-        portfolio: json['portfolio'],
-        uuid: json['uuid'],
-        imageUrl: json["imageUrl"],
+        id: json["id"] as String?,
+        fullname: json["fullname"] as String?,
+        firstname: json["firstname"] as String?,
+        lastname: json["lastname"] as String?,
+        email: json["email"] as String?,
+        phoneNumber: json["phoneNumber"] as String?,
+        gender: json["gender"] as String?,
+        zone: json["zone"] as String?,
+        fellowshipName: json['fellowshipName'] as String?,
+        unit: json["unit"] as String?,
+        workerOrExec: json["workerOrExec"] as String?,
+        portfolio: json['portfolio'] as String?,
+        uuid: json['uuid'] as String?,
+        imageUrl: json["imageUrl"] as String?,
 
         // paremeters to be added later
-        attending: json['attending'],
+        attending: json['attending'] as bool?,
         createdAt: json["createdAt"] != null
             ? DateTime.parse(json["createdAt"] as String)
             : null,

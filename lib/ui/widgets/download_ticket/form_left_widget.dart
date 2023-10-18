@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:rcf_attendance_generator/app/images.dart';
 
 import '../../pages/download_qr/controller/download_qr_controller.dart';
 import '../../../core/states/ticket_state.dart';

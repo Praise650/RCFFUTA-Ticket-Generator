@@ -80,6 +80,18 @@ class UserRepo implements FireStoreService {
   }
 
   @override
+  Future<PersonalDataForm?> checkAdminToLogin(String userId) async {
+    final currentUser = await _adminCollection.doc(userId).get();
+    if (currentUser.exists) {
+      final decodedData = currentUser.data();
+      return PersonalDataForm.fromJson(decodedData!);
+    } else {
+      return null;
+      // throw Exception('Could not fetch user');
+    }
+  }
+
+  @override
   Future<void> uploadMemberInformation(
       Map<String, dynamic> jsonData, uid) async {
     await _fsInstance.collection(membersCollectionPath).doc(uid).set(jsonData);

@@ -1,12 +1,11 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/service/auth_service.dart';
 import '../../../../app/locator.dart';
+import '../../download_qr/download_qr.dart';
 
 class AuthViewModel extends ChangeNotifier {
   final _authService = locator<AuthService>();
-  // late User? user;
   TextEditingController lastname = TextEditingController();
   TextEditingController email = TextEditingController();
 
@@ -15,17 +14,44 @@ class AuthViewModel extends ChangeNotifier {
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
-  // set isLoading(bool value) {
-  //   _isLoading = value;
-  // }
-
-  void createAndSaveUser() async {
+  void createAndSaveUser(context) async {
     if (saveAndValidate()) {
-      print("state of ${saveAndValidate()}");
       _isLoading = true;
       notifyListeners();
       try {
-        await _authService.login(
+        final userDataCreated = await _authService.login(
+            email: email.text, password: lastname.text);
+        if (userDataCreated != null) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => DownloadQRPage(
+                userId: userDataCreated.id!,
+              ),
+            ),
+          );
+        }
+        _isLoading = false;
+        notifyListeners();
+      } catch (e) {
+        notifyListeners();
+        _isLoading = false;
+        print(e);
+      }
+    } else {
+      print("Error the field cannot be empty");
+      // AppResponse.showErrorMessage("Error cant create user");
+      _isLoading = false;
+      notifyListeners();
+      return;
+    }
+  }
+  void loginAsAdmin(context) async {
+    if (saveAndValidate()) {
+      _isLoading = true;
+      notifyListeners();
+      try {
+        await _authService.loginAsAdmin(
             email: email.text, password: lastname.text);
         _isLoading = false;
         notifyListeners();

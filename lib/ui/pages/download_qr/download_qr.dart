@@ -11,7 +11,8 @@ import 'package:provider/provider.dart';
 import '../../styles/color.dart';
 
 class DownloadQRPage extends StatefulWidget {
-  const DownloadQRPage({super.key});
+  const DownloadQRPage({super.key, required this.userId});
+  final String userId;
 
   @override
   State<DownloadQRPage> createState() => _DownloadQRPageState();
@@ -21,13 +22,16 @@ class _DownloadQRPageState extends State<DownloadQRPage> {
   @override
   void initState() {
     super.initState();
-    _init();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      _init();
+    });
   }
 
   _init() async {
     try {
-      final userId = ModalRoute.of(context)!.settings.arguments as String;
-      await context.read<DownloadQrController>().getProfile(userId);
+      // final userId = ModalRoute.of(context)!.settings.arguments as String;
+      print("User Id: ${widget.userId}");
+      await context.read<DownloadQrController>().getProfile(widget.userId);
     } catch (e) {
       print(e);
       // Messenger.error(e.message);

@@ -80,7 +80,7 @@ class InfosRight extends StatelessWidget {
                     Text(
                       controller.user?.id == null
                           ? 'Your ID here'
-                          : controller.user!.id!,
+                          : controller.user!.uuid!,
                       style: GoogleFonts.spaceGrotesk(
                         fontSize: 16,
                         fontWeight: FontWeight.w700,

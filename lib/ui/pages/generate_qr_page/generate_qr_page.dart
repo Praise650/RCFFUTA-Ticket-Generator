@@ -81,8 +81,15 @@ class _GenerateQRPageState extends State<GenerateQRPage> {
                               ? const SizedBox.shrink()
                               : CustomInstitutionDropdown(
                                 hintText: "Select an Institution",
+                                onChanged:  (String? newValue) {
+                                setState(() {
+                                  model.selectedInstitution = newValue;
+                                  print(model.selectedInstitution);
+                                });
+                              },
                                 value: model.selectedRcfZone!.institutions!,
                                 appContext: context,
+                                selectedInstitution: model.selectedInstitution,
                                 label: "Institution"),
                           GeneralInput(
                             appContext: context,
@@ -94,6 +101,12 @@ class _GenerateQRPageState extends State<GenerateQRPage> {
                             label: 'Worker/Executive',
                             hintText: 'Executive',
                             controller: model.workerOrExec,
+                          ),
+                          GeneralInput(
+                            appContext: context,
+                            label: 'PortFolio (For Executives)',
+                            hintText: 'Portfolio',
+                            controller: model.portfolio,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,

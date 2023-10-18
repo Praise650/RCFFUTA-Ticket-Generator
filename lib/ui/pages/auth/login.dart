@@ -20,39 +20,53 @@ class _GenerateQRPageState extends State<LoginPage> {
     return Consumer<AuthViewModel>(builder: (context, model, _) {
       return BaseScaffold(
           body: ScrollableBaseScaffoldBody(
-            body: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 11),
-              child: Form(
-                key: model.login,
-                child: Column(
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 11),
+          child: Form(
+            key: model.login,
+            child: Column(
+              children: [
+                GeneralInput(
+                  appContext: context,
+                  hintText: 'ayokanmi12@gmail.com',
+                  controller: model.email,
+                  label: 'Email',
+                ),
+                GeneralInput(
+                  appContext: context,
+                  hintText: '+2348141234546',
+                  label: 'PhoneNumber',
+                  controller: model.lastname,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    GeneralInput(
-                      appContext: context,
-                      hintText: 'Ayodele',
-                      label: 'Last Name',
-                      controller: model.lastname,
-                    ),
-                    GeneralInput(
-                      appContext: context,
-                      hintText: 'ayokanmi12@gmail.com',
-                      controller: model.email,
-                      label: 'Email',
+                    BaseButton(
+                      isBusy: model.isLoading,
+                      // width: 100,
+                      onPressed: () {
+                        model.loginAsAdmin(context);
+                      },
+                      btnText: 'Login As Admin',
+                      iconColor: AppColors.white,
                     ),
                     BaseButton(
                       isBusy: model.isLoading,
                       // width: 100,
                       onPressed: () {
-                        model.createAndSaveUser();
+                        model.createAndSaveUser(context);
                       },
                       btnText: 'Login',
                       iconColor: AppColors.white,
                     ),
-                    const SizedBox(height: 10),
                   ],
                 ),
-              ),
+                const SizedBox(height: 10),
+              ],
             ),
-          ));
+          ),
+        ),
+      ));
     });
   }
 }
