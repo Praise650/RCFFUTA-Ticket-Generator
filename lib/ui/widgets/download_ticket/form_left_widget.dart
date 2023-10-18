@@ -105,7 +105,7 @@ class FormLeft extends StatelessWidget {
           child: ElevatedButton(
             onPressed: () {
               if (controller.state.runtimeType == SuccessTicketState) {
-                controller.downloadTicket();
+                controller.captureAndSavePng();
               }
             },
             style: ElevatedButton.styleFrom(

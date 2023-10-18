@@ -13,14 +13,13 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.2
   qr_flutter: ^4.1.0
-  path_provider: ^2.1.1
+#  path_provider: ^2.1.1
   flutter_svg: ^2.0.7
   flutter_hooks: ^0.20.3
   intl: ^0.18.1
-  universal_io: ^2.2.2
   universal_html: ^2.2.4
 
-#  state_management:
+# state_management:
   provider: ^6.0.5
   get_it: ^7.6.0
 #  get: ^4.6.5
@@ -37,7 +36,6 @@ dependencies:
   firebase_storage: ^11.2.8
 
 #  image to widget
-  widgets_to_image: ^0.0.2
   pdf: ^3.10.4
   screenshot: ^2.1.0
 

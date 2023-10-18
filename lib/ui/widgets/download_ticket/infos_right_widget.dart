@@ -1,5 +1,6 @@
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 import '../../../app/images.dart';
 import '../../pages/download_qr/controller/download_qr_controller.dart';
@@ -13,6 +14,7 @@ class InfosRight extends StatelessWidget {
   });
   final DownloadQrController controller;
   final BoxConstraints constraints;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,43 +24,28 @@ class InfosRight extends StatelessWidget {
       decoration: const BoxDecoration(
         color: AppColors.purpleNormal,
       ),
-      child: LayoutBuilder(builder: (context, constraints2) {
-        return Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              width: constraints2.maxWidth * 0.6,
-              child: AspectRatio(
-                aspectRatio: 1.0,
-                child: Image.asset(
-                  AppImages.cover,
-                  fit: BoxFit.fill,
+      child: LayoutBuilder(
+        builder: (context, constraints2) {
+          return Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                width: constraints2.maxWidth * 0.6,
+                child: AspectRatio(
+                  aspectRatio: 1.0,
+                  child: Image.asset(
+                    AppImages.cover,
+                    fit: BoxFit.fill,
+                  ),
                 ),
               ),
-            ),
-            Container(
-              width: constraints2.maxWidth * 0.3,
-              padding: const EdgeInsets.all(16),
-              color: Colors.white,
-              child: LayoutBuilder(builder: (context, constraints2) {
-                return Column(
+              Container(
+                width: constraints2.maxWidth * 0.3,
+                padding: const EdgeInsets.all(16),
+                color: Colors.white,
+                child: Column(
                   children: [
-                    ClipRRect(
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(63),
-                      ),
-                      child: controller.user?.imageUrl == null
-                          ? Image.asset('assets/images/img_avatar.png',
-                              height: 50, width: 50)
-                          : Image.network(
-                              controller.user!.imageUrl!,
-                              fit: BoxFit.cover,
-                              height: 50,
-                              width: 50,
-                            ),
-                    ),
-                    const SizedBox(height: 16),
                     Text(
                       'ATTENDEE',
                       style: GoogleFonts.spaceGrotesk(
@@ -87,7 +74,35 @@ class InfosRight extends StatelessWidget {
                         color: AppColors.greyDark,
                       ),
                     ),
-                    const Expanded(child: SizedBox()),
+                    Expanded(
+                      child: ClipRRect(
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(63),
+                        ),
+                        child: controller.user?.imageUrl == null
+                            ? QrImageView(
+                                data: controller.user!.uuid.toString(),
+                                version: QrVersions.auto,
+                                // size: 190.0,
+                                gapless: true,
+                                errorStateBuilder: (ctx, err) {
+                                  return const Center(
+                                    child: Text(
+                                      'Something went wrong!!!',
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  );
+                                },
+                              )
+                            : Image.network(
+                                controller.user!.imageUrl!,
+                                fit: BoxFit.cover,
+                                height: 50,
+                                width: 50,
+                              ),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
                     Column(
                       children: [
                         SizedBox(
@@ -167,12 +182,12 @@ class InfosRight extends StatelessWidget {
                     const SizedBox(height: 32),
                     Image.asset('assets/images/lines.png')
                   ],
-                );
-              }),
-            ),
-          ],
-        );
-      }),
+                ),
+              ),
+            ],
+          );
+        },
+      ),
     );
   }
 }

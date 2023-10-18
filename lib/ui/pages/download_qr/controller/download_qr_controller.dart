@@ -1,28 +1,26 @@
-import 'package:rcf_attendance_generator/routes/app_routes.dart';
-import 'package:universal_html/html.dart' as html;
-import 'dart:js_interop';
 import 'dart:typed_data';
+import 'dart:js_interop';
 
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:screenshot/screenshot.dart';
+import 'package:flutter/rendering.dart';
+import 'dart:ui';
 
-import '../../../../app/locator.dart';
-import '../../../../core/models/personal_data.dart';
+import '../../../../core/service/download_qr_service.dart';
 import '../../../../core/service/firestore_service.dart';
-import '../../../../core/service/navigator_service.dart';
+import '../../../../core/models/personal_data.dart';
 import '../../../../core/states/ticket_state.dart';
+import '../../../../app/locator.dart';
 
 class DownloadQrController extends ChangeNotifier {
   final _fService = locator<FireStoreService>();
-  final _navigationService = locator<NavigatorService>();
-
-  Uint8List? bytes;
+  final _downloadService = locator<DownloadTicketService>();
   //Create an instance of ScreenshotController
-  ScreenshotController screenshotController = ScreenshotController();
+  // ScreenshotController screenshotController = ScreenshotController();
 
   PersonalDataForm? user;
   ITicketState state = ITicketState();
+  final GlobalKey _qrkey = GlobalKey();
+  GlobalKey get qrKey => _qrkey;
 
   Future<void> getProfile(userId) async {
     state = LoadingTicketState();
@@ -34,15 +32,19 @@ class DownloadQrController extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> downloadTicket() async {
+  Future<void> uploadTicket(Uint8List? bytes) async {
     // getPdf(bytes!);
-    bytes = await screenshotController.capture();
-    notifyListeners();
-    String resUrl = await uploadImage(bytes!,user!.uuid!);
-    html.AnchorElement anchorElement = html.AnchorElement(href: resUrl);
-    anchorElement.download = "Tickets/Doc2023${user!.uuid}";
-    anchorElement.click();
-    _navigationService.replace(AppRoutes.generateQrPage);
+    try {
+      print("Uploading ticket");
+      print("User Id: ${user!.uuid} and ${bytes.runtimeType}");
+      await _downloadService.downloadTicket(
+        id: user!.uuid!,
+        bytes: bytes!,
+      );
+      print("Upload successful");
+    } catch (e) {
+      print(e);
+    }
 
     // final islandRef = FirebaseStorage.instance.ref().child("Folder/${user!.uuid}");
     // final appDocDir = await getApplicationDocumentsDirectory();
@@ -71,63 +73,37 @@ class DownloadQrController extends ChangeNotifier {
     // });
   }
 
-
-  ///convert bytes to file
-  // io.File createFileFromBytes(Uint8List bytes) => io.File.fromRawPath(bytes);
-
-  // Future uploadImageToFirebase(File value,String userID) async {
-  //   String fileName = value.path;
-  //   final storageRef = FirebaseStorage.instance.ref('uploads');
-  //   final mountainsRef = storageRef.child("$userID/$fileName");
-  //   final mountainImagesRef = storageRef.child("$userID/$fileName");
-  //   assert(mountainsRef.name == mountainImagesRef.name);
-  //   assert(mountainsRef.fullPath != mountainImagesRef.fullPath);
-  //   // Directory appDocDir = await getApplicationDocumentsDirectory();
-  //   // String filePath = '${appDocDir.absolute}/$fileName';
-  //   // File file = File(filePath);
-  //   await mountainsRef.putFile(value);
-  //   await mountainsRef.getDownloadURL();
-  //
-  //   // final firebaseStorageRef =
-  //   // FirebaseStorage.instance.ref().child('/$fileName');
-  //   // StorageUploadTask uploadTask = firebaseStorageRef.putFile(_imageFile);
-  //   // StorageTaskSnapshot taskSnapshot = await uploadTask.onComplete;
-  //   // taskSnapshot.ref.getDownloadURL().then(
-  //   //       (value) => print("Done: $value"),
-  //   // );
-  // }
-  //
-  // Future<void> getPdf(Uint8List screenShot) async {
-  //   final pdf = pw.Document();
-  //   pdf.addPage(
-  //     pw.Page(
-  //       pageFormat: PdfPageFormat.a4,
-  //       build: (context) {
-  //         return pw.Center(
-  //           child: pw.Image(
-  //             pw.MemoryImage(screenShot),
-  //             fit: pw.BoxFit.contain,
-  //           ),
-  //         );
-  //       },
-  //     ),
-  //   );
-  //   final output = File('Download/ticker${user!.uuid}');
-  //   await output.writeAsBytes(await pdf.save());
-  //   print(output.path);
-  // }
-
-  Future<String> uploadImage(Uint8List file,String id) async {
-
-    Reference ref = FirebaseStorage.instance.ref().child('Tickets');
-    ref = ref.child("Doc2023$id");
-
-    UploadTask uploadTask = ref.putData(
-      file,
-      SettableMetadata(contentType: 'image/png'),
-    );
-    TaskSnapshot snapshot = await uploadTask;
-    String downloadUrl = await snapshot.ref.getDownloadURL();
-    return downloadUrl;
+  Future<void> captureAndSavePng() async {
+    state = LoadingTicketState();
+    notifyListeners();
+    print("Starting download ...");
+    try{
+      RenderRepaintBoundary boundary = _qrkey.currentContext!.findRenderObject() as RenderRepaintBoundary;
+      var image = await boundary.toImage(pixelRatio: 3.0);
+      print("Image captured");
+      //Drawing White Background because Qr Code is Black
+      final whitePaint = Paint()..color = Colors.white;
+      final recorder = PictureRecorder();
+      final canvas = Canvas(recorder,Rect.fromLTWH(0,0,image.width.toDouble(),image.height.toDouble()));
+      canvas.drawRect(Rect.fromLTWH(0, 0, image.width.toDouble(), image.height.toDouble()), whitePaint);
+      canvas.drawImage(image, Offset.zero, Paint());
+      final picture = recorder.endRecording();
+      final img = await picture.toImage(image.width, image.height);
+      ByteData? byteData = await img.toByteData(format: ImageByteFormat.png);
+      Uint8List pngBytes = byteData!.buffer.asUint8List();
+      uploadTicket(pngBytes);
+      print("Image downloaded");
+      state = SuccessTicketState();
+      notifyListeners();
+      // if(!mounted)return;
+      // const snackBar = SnackBar(content: Text('QR code saved to gallery'));
+      // ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }catch(e){
+      state = FailureTicketState();
+      notifyListeners();
+      // if(!mounted)return;
+      // const snackBar = SnackBar(content: Text('Something went wrong!!!'));
+      // ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
   }
 }

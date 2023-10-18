@@ -1,11 +1,10 @@
 import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
-import 'package:rcf_attendance_generator/core/states/ticket_state.dart';
-import 'package:screenshot/screenshot.dart';
+
 import '../../widgets/download_ticket/infos_right_widget.dart';
 import '../../widgets/download_ticket/form_left_widget.dart';
 import 'package:rcf_attendance_generator/app/images.dart';
+import '../../../core/states/ticket_state.dart';
 import 'controller/download_qr_controller.dart';
 import 'package:provider/provider.dart';
 import '../../styles/color.dart';
@@ -70,8 +69,8 @@ class _DownloadQRPageState extends State<DownloadQRPage> {
                                         constraints: constraints,
                                         controller: model,
                                       ),
-                                      Screenshot(
-                                        controller: model.screenshotController,
+                                      RepaintBoundary(
+                                        key: model.qrKey,
                                         child: InfosRight(
                                           constraints: constraints,
                                           controller: model,
@@ -92,14 +91,13 @@ class _DownloadQRPageState extends State<DownloadQRPage> {
                                         controller: model,
                                       ),
                                       const SizedBox(width: 32),
-                                      Screenshot(
-                                        controller: model.screenshotController,
+                                      RepaintBoundary(
+                                        key: model.qrKey,
                                         child: InfosRight(
                                           constraints: constraints,
                                           controller: model,
                                         ),
                                       ),
-                                      // if (model.bytes != null) buildImage(model.bytes!),
                                     ],
                                   ),
                                 );
@@ -113,5 +111,11 @@ class _DownloadQRPageState extends State<DownloadQRPage> {
     );
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+    final _qrKey = context.read<DownloadQrController>().qrKey;
+    _qrKey.currentState!.dispose();
+  }
   Widget buildImage(Uint8List bytes) => Image.memory(bytes);
 }
