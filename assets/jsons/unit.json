@@ -1,0 +1,29 @@
+{
+  "code": "01",
+  "message": "Successful",
+  "data": {
+      "type": "Workers",
+      "unit": [
+        "Member",
+        "Sanctuary Unit",
+        "Organizing Unit",
+        "Publicity Unit",
+        "Welfare Unit",
+        "Choir Unit",
+        "ICT Unit",
+        "Editorial Unit",
+        "Ushering Unit",
+        "Drama Unit",
+        "Academic Unit",
+        "Prayer Unit",
+        "Bible Study Unit",
+        "Evangelism Unit",
+        "Alumni Unit",
+        "Library Unit",
+        "Follow Up Unit",
+        "Transport Unit",
+        "Commercial Unit",
+        "Decoration Unit"
+      ]
+    }
+}

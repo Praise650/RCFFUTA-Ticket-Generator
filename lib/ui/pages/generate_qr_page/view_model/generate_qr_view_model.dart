@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:rcf_attendance_generator/core/service/navigator_service.dart';
 
 import '../../../../core/models/personal_data.dart';
 import '../../../../core/models/zone_model.dart';
@@ -15,22 +14,21 @@ import '../../download_qr/download_qr.dart';
 class GenerateQrViewModel extends ChangeNotifier {
   final _authService = locator<AuthService>();
   final _fService = locator<FireStoreService>();
-  final _navigatorService = locator<NavigatorService>();
-  final RcfZonesRepo _rcfZonesRepo = RcfZonesRepo();
+  final RcfZonesRepo _zonesRepo = RcfZonesRepo();
+  RcfZonesRepo get zonesRepo => _zonesRepo;
   ITicketState state = ITicketState();
   late User? user;
-  List<RcfZones> rcfZonesList = [];
-  RcfZones? selectedRcfZone;
-  List<Institution> institutionList = [];
-  String? selectedInstitution;
+
   TextEditingController firstname = TextEditingController();
   TextEditingController lastname = TextEditingController();
   TextEditingController email = TextEditingController();
   TextEditingController phoneNumber = TextEditingController();
   String? gender = 'Male';
-  TextEditingController unit = TextEditingController();
-  TextEditingController workerOrExec = TextEditingController();
-  TextEditingController portfolio = TextEditingController();
+  RcfZones? selectedZone;
+  String? selectedInstitution;
+  String? selectedUnit;
+  String? selectedPortfolio;
+
 
   final formKey = GlobalKey<FormState>();
 
@@ -41,13 +39,8 @@ class GenerateQrViewModel extends ChangeNotifier {
     _isLoading = true;
     notifyListeners();
     try {
-      await _rcfZonesRepo.getZones().then((value) {
-        rcfZonesList = value.data!;
-        for (var rcfZone in rcfZonesList) {
-          print("In the zone ${rcfZone.zone}");
-        }
+      await _zonesRepo.fetchData();
         notifyListeners();
-      });
       _isLoading = false;
       notifyListeners();
     } catch (e) {
@@ -73,13 +66,12 @@ class GenerateQrViewModel extends ChangeNotifier {
           email: email.text,
           phoneNumber: phoneNumber.text,
           gender: gender,
-          zone: selectedRcfZone!.zone,
+          zone: selectedZone!.zone,
           fellowshipName: selectedInstitution,
-          unit: unit.text,
-          workerOrExec: workerOrExec.text,
-          portfolio: portfolio.text,
+          unit: selectedUnit,
+          portfolio: selectedPortfolio,
           uuid:
-              IDGenerator.createId(firstname.text, lastname.text).toLowerCase(),
+              IDGenerator.createId(firstname.text, lastname.text).toUpperCase(),
           createdAt: DateTime.now(),
           updatedAt: DateTime.now(),
           attending: false,
@@ -125,15 +117,7 @@ class GenerateQrViewModel extends ChangeNotifier {
   }
 
   updateInstitution() {
-    state = LoadingTicketState();
-    notifyListeners();
-    institutionList = selectedRcfZone!.institutions!;
-    for (var newVal in institutionList) {
-      print("Institution List: ${newVal.fellowshipName}");
-    }
-    institutionList.isNotEmpty
-        ? state = SuccessTicketState()
-        : state = FailureTicketState();
+    _zonesRepo.fetchInstitutions(selectedZone!);
     notifyListeners();
   }
 }

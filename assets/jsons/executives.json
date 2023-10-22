@@ -1,0 +1,18 @@
+{
+  "code": "01",
+  "message": "Successful",
+  "data": {
+    "type": "executive",
+    "position": [
+      "Nil",
+      "President",
+      "Vice President",
+      "General Secretary",
+      "Prayer Coordinator",
+      "Bible Study Coordinator",
+      "Brother $ Sister Coordinator",
+      "Media | Publicity | ICT Coordinator",
+      "Others"
+    ]
+  }
+}

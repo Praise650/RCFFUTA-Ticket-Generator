@@ -10,7 +10,6 @@ class PersonalDataForm {
   final String? zone;
   final String? fellowshipName;
   final String? unit;
-  final String? workerOrExec;
   final String? portfolio;
   final String? uuid;
 
@@ -31,7 +30,6 @@ class PersonalDataForm {
     this.zone,
     this.fellowshipName,
     this.unit,
-    this.workerOrExec,
     this.portfolio,
     //parameters to be used later
     this.id,
@@ -54,7 +52,6 @@ class PersonalDataForm {
         zone: json["zone"] as String?,
         fellowshipName: json['fellowshipName'] as String?,
         unit: json["unit"] as String?,
-        workerOrExec: json["workerOrExec"] as String?,
         portfolio: json['portfolio'] as String?,
         uuid: json['uuid'] as String?,
         imageUrl: json["imageUrl"] as String?,
@@ -81,7 +78,6 @@ class PersonalDataForm {
         'zone':zone,
         'fellowshipName':fellowshipName,
         'unit':unit,
-        'workerOrExec':workerOrExec,
         'portfolio':portfolio,
         'uuid':uuid,
         'imageUrl': imageUrl,

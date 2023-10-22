@@ -2,23 +2,24 @@ import 'dart:js_interop';
 
 import 'package:flutter/material.dart';
 
-import '../../core/models/zone_model.dart';
-import '../styles/color.dart';
-import '../styles/dimens.dart';
-import '../styles/texts.dart';
+import '../../styles/color.dart';
+import '../../styles/dimens.dart';
+import '../../styles/texts.dart';
 
-class CustomInstitutionDropdown extends StatefulWidget {
-  final Function(String?) onChanged;
-
-  CustomInstitutionDropdown(
-      {super.key,
-      this.label,
-      this.focusNode,
-      this.margin,
-      this.autoUnFocus = false,
-      required this.appContext,
-      this.hintText,
-      this.fillColor, this.selectedInstitution, required this.value, required this.onChanged});
+class CustomUnitDropdown extends StatefulWidget {
+  const CustomUnitDropdown({
+    super.key,
+    this.label,
+    this.focusNode,
+    this.margin,
+    this.autoUnFocus = false,
+    required this.appContext,
+    this.hintText,
+    this.fillColor,
+    this.selectedUnit,
+    required this.value,
+    required this.onChanged,
+  });
   final String? label;
   final String? hintText;
   final FocusNode? focusNode;
@@ -26,22 +27,22 @@ class CustomInstitutionDropdown extends StatefulWidget {
   final bool autoUnFocus;
   final BuildContext appContext;
   final Color? fillColor;
-  String? selectedInstitution;
-  final List<Institution> value;
+  final String? selectedUnit;
+  final List<String> value;
+  final Function(String?) onChanged;
 
   @override
-  State<CustomInstitutionDropdown> createState() =>
-      _CustomInstitutionDropdownState();
+  State<CustomUnitDropdown> createState() => _CustomUnitDropdownState();
 }
 
-class _CustomInstitutionDropdownState extends State<CustomInstitutionDropdown> {
+class _CustomUnitDropdownState extends State<CustomUnitDropdown> {
   late FocusNode _focusNode;
   bool activeErrorState = false;
   String? selectedInstitution;
 
   @override
   void initState() {
-    selectedInstitution = widget.value[0].fellowshipName;
+    selectedInstitution = widget.value[0];
     _focusNode = widget.focusNode ?? FocusNode();
     _focusNode.addListener(() {
       setState(() {});
@@ -96,34 +97,34 @@ class _CustomInstitutionDropdownState extends State<CustomInstitutionDropdown> {
                 ? const EdgeInsets.only(top: 8.0, bottom: 4.0)
                 : widget.margin,
             decoration: BoxDecoration(
-              color: _focusNode.hasFocus ||
-                      widget.value.isNotEmpty
+              color: _focusNode.hasFocus || widget.value.isNotEmpty
                   ? AppColors.fieldColor
                   : widget.fillColor,
               borderRadius: BorderRadius.circular(Dimens.inputFieldRadius),
               border: border(selectedInstitution!),
             ),
             child: DropdownButton<String>(
-                    value: widget.selectedInstitution,
-                    focusNode: _focusNode,
-                    onTap: () {
-                      // if (widget.onTap != null) widget.onTap!();
-                      _onFocus();
-                    },
-                    style: kInputFieldTextStyle,
-                    // decoration: buildInputDecoration(context),
-                    underline: const SizedBox.shrink(),
-                    isExpanded: true,
-                    hint: Text(widget.hintText.toString()),
-                    onChanged: widget.onChanged,
-                    items: widget.value
-                        .map<DropdownMenuItem<String>>((Institution value) {
-                      return DropdownMenuItem<String>(
-                        value: value.fellowshipName,
-                        child: Text(value.fellowshipName ?? ''),
-                      );
-                    }).toList(),
-                  ),
+              value: widget.selectedUnit,
+              focusNode: _focusNode,
+              onTap: () {
+                // if (widget.onTap != null) widget.onTap!();
+                _onFocus();
+              },
+              style: kInputFieldTextStyle,
+              // decoration: buildInputDecoration(context),
+              underline: const SizedBox.shrink(),
+              isExpanded: true,
+              hint: Text(widget.hintText.toString()),
+              onChanged: widget.onChanged,
+              items: widget.value
+                  .map<DropdownMenuItem<String>>(
+                    (value) => DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    ),
+                  )
+                  .toList(),
+            ),
           ),
         ],
       ),
