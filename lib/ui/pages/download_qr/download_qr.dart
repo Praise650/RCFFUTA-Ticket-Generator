@@ -1,10 +1,13 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:rcf_attendance_generator/ui/widgets/download_qr/mobile_view.dart';
 
+import '../../widgets/download_qr/desktop_view.dart';
 import '../../widgets/download_ticket/infos_right_widget.dart';
 import '../../widgets/download_ticket/form_left_widget.dart';
 import 'package:rcf_attendance_generator/app/images.dart';
 import '../../../core/states/ticket_state.dart';
+import '../../widgets/loader.dart';
 import 'controller/download_qr_controller.dart';
 import 'package:provider/provider.dart';
 import '../../styles/color.dart';
@@ -43,68 +46,44 @@ class _DownloadQRPageState extends State<DownloadQRPage> {
       builder: (context, model, _) {
         return Scaffold(
           body: Container(
-            width: double.infinity,
+            width: MediaQuery.of(context).size.width,
             decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(AppImages.background),
                 fit: BoxFit.fill,
               ),
             ),
-            child: Center(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 60),
-                child: model.state.runtimeType == LoadingTicketState
-                    ? const CircularProgressIndicator()
-                    : LayoutBuilder(
-                        builder: (context, constraints) {
-                          return constraints.maxWidth < 600
-                              ? SizedBox(
-                                  height: constraints.maxHeight,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      FormLeft(
-                                        linearGradient:
-                                            AppColors.linearGradient,
-                                        constraints: constraints,
-                                        controller: model,
-                                      ),
-                                      RepaintBoundary(
-                                        key: model.qrKey,
-                                        child: InfosRight(
-                                          constraints: constraints,
-                                          controller: model,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              : SizedBox(
-                                  height: constraints.maxHeight * 0.5,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      FormLeft(
-                                        linearGradient:
-                                            AppColors.linearGradient,
-                                        constraints: constraints,
-                                        controller: model,
-                                      ),
-                                      const SizedBox(width: 32),
-                                      RepaintBoundary(
-                                        key: model.qrKey,
-                                        child: InfosRight(
-                                          constraints: constraints,
-                                          controller: model,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                );
-                        },
-                      ),
-              ),
-            ),
+            child: model.state.runtimeType == LoadingTicketState
+                ? buildLoaderWidget()
+                : LayoutBuilder(
+                    builder: (context, constraints) {
+                      if (constraints.maxWidth < 600) {
+                        return DownloadQrMobileView(
+                          linearGradient: AppColors.linearGradient,
+                          controller: model,
+                          constraints: constraints,
+                        );
+                      } else if (constraints.maxWidth > 600 &&
+                          constraints.maxWidth < 1000) {
+                        return DownloadQrMobileView(
+                          linearGradient: AppColors.linearGradient,
+                          controller: model,
+                          constraints: constraints,
+                        );
+                      } else {
+                        return DownloadQrMobileView(
+                          linearGradient: AppColors.linearGradient,
+                          controller: model,
+                          constraints: constraints,
+                        );
+                        // return DownloadQrDesktopView(
+                        //   linearGradient: AppColors.linearGradient,
+                        //   controller: model,
+                        //   constraints: constraints,
+                        // );
+                      }
+                    },
+                  ),
           ),
         );
       },
@@ -117,5 +96,6 @@ class _DownloadQRPageState extends State<DownloadQRPage> {
     final _qrKey = context.read<DownloadQrController>().qrKey;
     _qrKey.currentState!.dispose();
   }
+
   Widget buildImage(Uint8List bytes) => Image.memory(bytes);
 }

@@ -27,10 +27,10 @@ class RcfZonesRepo{
       print("In the zone ${rcfZone.zone}");
     }
     for (var unit in _units) {
-      print("In the zone $unit");
+      print("$unit Unit");
     }
     for (var position in _positions) {
-      print("In the zone $position");
+      print("Position $position");
     }
   }
 

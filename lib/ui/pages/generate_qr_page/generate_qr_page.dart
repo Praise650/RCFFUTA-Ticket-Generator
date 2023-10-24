@@ -3,9 +3,11 @@ import 'dart:js_interop';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../app/images.dart';
 import '../../layouts/base_scaffold.dart';
 import '../../layouts/scrollable_base_scaffold_body.dart';
 import '../../styles/color.dart';
+import '../../styles/texts.dart';
 import '../../widgets/buttons/base_button.dart';
 import '../../widgets/drop_downs/custom_institution_dropdown.dart';
 import '../../widgets/drop_downs/custom_units_dropdown.dart';
@@ -33,19 +35,33 @@ class _GenerateQRPageState extends State<GenerateQRPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<GenerateQrViewModel>(builder: (context, model, _) {
-      return BaseScaffold(
-          body: model.isLoading == true
-              ? const Center(child: CircularProgressIndicator())
-              : ScrollableBaseScaffoldBody(
-                  body: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 11),
-                    child: Form(
+    return Consumer<GenerateQrViewModel>(
+      builder: (context, model, _) {
+        return BaseScaffold(
+          body: ScrollableBaseScaffoldBody(
+            body: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 11),
+              child: model.isLoading == true
+                  ? const Center(child: CircularProgressIndicator())
+                  : Form(
                       key: model.formKey,
                       child: Column(
                         children: [
-                          Text(
-                            "LTP 2023 Registration".toUpperCase(),
+                          Row(
+                            children: [
+                              Image.asset(
+                                AppImages.crmLogo,
+                                width: 70,
+                                height: 100,
+                              ),
+                              const SizedBox(width: 10),
+                              Text(
+                                "LTP 2023 Registration".toUpperCase(),
+                                style: kHeadline1TextStyle.copyWith(
+                                  color: AppColors.textSecondary,
+                                ),
+                              ),
+                            ],
                           ),
                           GeneralInput(
                             appContext: context,
@@ -87,11 +103,10 @@ class _GenerateQRPageState extends State<GenerateQRPage> {
                                   appContext: context,
                                   label: "Institution",
                                   hintText: "Select an Institution",
-                                  onChanged: (String? value) =>
-                                    setState(() {
-                                      model.selectedInstitution = value;
-                                      print(model.selectedInstitution);
-                                    }),
+                                  onChanged: (String? value) => setState(() {
+                                    model.selectedInstitution = value;
+                                    print(model.selectedInstitution);
+                                  }),
                                   value: model.selectedZone!.institutions!,
                                   selectedInstitution:
                                       model.selectedInstitution,
@@ -102,21 +117,21 @@ class _GenerateQRPageState extends State<GenerateQRPage> {
                             hintText: 'Editorial Unit',
                             value: model.zonesRepo.units,
                             selectedUnit: model.selectedUnit,
-                            onChanged: (String? value) =>
-                              setState(() {
-                                model.selectedUnit = value;
-                                print(model.selectedUnit);
-                              }),
+                            onChanged: (String? value) => setState(() {
+                              model.selectedUnit = value;
+                              print(model.selectedUnit);
+                            }),
                           ),
                           CustomUnitDropdown(
                             appContext: context,
                             label: 'PortFolio (For Executives)',
                             hintText: 'Portfolio',
                             value: model.zonesRepo.positions,
+                            selectedUnit: model.selectedPortfolio,
                             onChanged: (String? value) {
                               setState(() {
                                 model.selectedPortfolio = value;
-                                print(model.selectedInstitution);
+                                print(model.selectedPortfolio);
                               });
                             },
                           ),
@@ -160,8 +175,10 @@ class _GenerateQRPageState extends State<GenerateQRPage> {
                         ],
                       ),
                     ),
-                  ),
-                ));
-    });
+            ),
+          ),
+        );
+      },
+    );
   }
 }

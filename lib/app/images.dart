@@ -6,4 +6,6 @@ class AppImages {
   static const String background = "assets/images/image_background.png";
   static const String github = 'assets/images/logo_github.png';
   static const String cover = "assets/images/img_cover.png";
+  
+  static const String crmLogo = "assets/images/crm_logo.jpg";
 }

@@ -69,7 +69,7 @@ class GenerateQrViewModel extends ChangeNotifier {
           zone: selectedZone!.zone,
           fellowshipName: selectedInstitution,
           unit: selectedUnit,
-          portfolio: selectedPortfolio,
+          portfolio: selectedPortfolio??'Nil',
           uuid:
               IDGenerator.createId(firstname.text, lastname.text).toUpperCase(),
           createdAt: DateTime.now(),

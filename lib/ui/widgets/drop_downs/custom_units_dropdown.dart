@@ -42,7 +42,7 @@ class _CustomUnitDropdownState extends State<CustomUnitDropdown> {
 
   @override
   void initState() {
-    selectedInstitution = widget.value[0];
+    selectedInstitution = '';
     _focusNode = widget.focusNode ?? FocusNode();
     _focusNode.addListener(() {
       setState(() {});
