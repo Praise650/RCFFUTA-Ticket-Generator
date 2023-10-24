@@ -851,6 +851,332 @@
           "schoolName": "Rivers State Chapter, Port Harcourt"
         }
       ]
+    },
+    {
+      "zone": "LAGOS ZONE",
+      "institutions": [
+        {
+          "fellowshipName": "RCF UNIVERSITY OF LAGOS, AKOKA",
+          "schoolName": "University of Lagos, Akoka"
+        },
+        {
+          "fellowshipName": "RCF LAGOS UNIVERSITY TEACHING HOSPITAL, IDI ARABA",
+          "schoolName": "Lagos University Teaching Hospital, Idi Araba"
+        },
+        {
+          "fellowshipName": "RCF LAGOS STATE POLYTECHNIC, IKORODU",
+          "schoolName": "Lagos State Polytechnic, Ikorodu"
+        },
+        {
+          "fellowshipName": "RCF MICHEAL OTEDOLA COLLEGE OF PRIMARY EDUCATION, EPE",
+          "schoolName": "Micheal Otedola College of Primary Education, Epe"
+        },
+        {
+          "fellowshipName": "RCF LAGOS STATE UNIVERSITY, OJO CAMPUS",
+          "schoolName": "Lagos State University, Ojo Campus"
+        },
+        {
+          "fellowshipName": "RCF LAGOS STATE UNIVERSITY, EPE CAMPUS",
+          "schoolName": "Lagos State University, Epe Campus"
+        },
+        {
+          "fellowshipName": "RCF FEDERAL COLLEGE OF EDUCATION, AKOKA",
+          "schoolName": "Federal College of Education, Akoka"
+        },
+        {
+          "fellowshipName": "RCF YABA COLLEGE OF TECHNOLOGY, YABA",
+          "schoolName": "Yaba College of Technology, Yaba"
+        },
+        {
+          "fellowshipName": "RCF YABA COLLEGE OF TECHNOLOGY, EPE CAMPUS",
+          "schoolName": "Yaba College of Technology, Epe Campus"
+        },
+        {
+          "fellowshipName": "RCF ADENIRAN OGUNSANYA COLLEGE OF EDUCATION, IJANIKI",
+          "schoolName": "Adeniran Ogunsanya College of Education, Ijaniki"
+        },
+        {
+          "fellowshipName": "RCF SCHOOL OF OCEANOGRAPHY",
+          "schoolName": "School of Oceanography"
+        },
+        {
+          "fellowshipName": "RCCF EJIGBO FAMILY HOUSE",
+          "schoolName": "Ejigbo Family House"
+        },
+        {
+          "fellowshipName": "RCCF AJAH FAMILY HOUSE",
+          "schoolName": "Ajah Family House"
+        },
+        {
+          "fellowshipName": "RCCF IKOTUN FAMILY HOUSE",
+          "schoolName": "Ikotun Family House"
+        }
+      ]
+    },
+    {
+      "zone": "ONDO ZONE",
+      "institutions": [
+        {
+          "fellowshipName": "FEDERAL UNIVERSITY OF TECHNOLOGY AKURE",
+          "schoolName": "Federal University of Technology, Akure"
+        },
+        {
+          "fellowshipName": "ADEKUNLE AJASIN UNIVERSITY, AKUNGBA",
+          "schoolName": "Adekunle Ajasin University, Akungba"
+        },
+        {
+          "fellowshipName": "ADEYEMI COLLEGE OF EDUCATION, ONDO",
+          "schoolName": "Adeyemi College of Education, Ondo"
+        },
+        {
+          "fellowshipName": "OLUSEGUN AGAGU UNIVERSITY OF SCIENCE AND TECHNOLOGY, OKITIPUPA",
+          "schoolName": "Olusegun Agagu University of Science and Technology, Okitipupa"
+        },
+        {
+          "fellowshipName": "RUFUS GIWA POLYTECHNIC, OWO",
+          "schoolName": "Rufus Giwa Polytechnic, Owo"
+        },
+        {
+          "fellowshipName": "ACHIEVERS UNIVERSITY, OWO",
+          "schoolName": "Achievers University, Owo"
+        },
+        {
+          "fellowshipName": "SCHOOL OF HEALTH TECHNOLOGY, AKURE",
+          "schoolName": "School of Health Technology, Akure"
+        },
+        {
+          "fellowshipName": "MILLENNIUM COLLEGE OF HEALTH TECHNOLOGY, AKURE",
+          "schoolName": "Millennium College of Health Technology, Akure"
+        },
+        {
+          "fellowshipName": "UNIVERSITY OF MEDICAL SCIENCE(NURSING) AKURE CAMPUS",
+          "schoolName": "University of Medical Science (Nursing), Akure Campus"
+        },
+        {
+          "fellowshipName": "UNIVERSITY OF MEDICAL SCIENCES ONDO",
+          "schoolName": "University of Medical Sciences, Ondo"
+        },
+        {
+          "fellowshipName": "FEDERAL POLYTECHNIC ILE-OLUJI",
+          "schoolName": "Federal Polytechnic Ile-Oluji"
+        },
+        {
+          "fellowshipName": "FEDERAL COLLEGE OF AGRICULTURE AKURE",
+          "schoolName": "Federal College of Agriculture, Akure"
+        },
+        {
+          "fellowshipName": "COLLEGE OF EDUCATION, ERO",
+          "schoolName": "College of Education, Ero"
+        }
+      ]
+    },
+    {
+      "zone": "ENUGU/EBONYI ZONE",
+      "institutions": [
+        {
+          "fellowshipName": "RCF UNIVERSITY OF NIGERIA NSUKKA",
+          "schoolName": "University of Nigeria, Nsukka"
+        },
+        {
+          "fellowshipName": "RCF UNIVERSITY OF NIGERIA ENUGU CAMPUS",
+          "schoolName": "University of Nigeria, Enugu Campus"
+        },
+        {
+          "fellowshipName": "RCF ENUGU STATE UNIVERSITY OF SCIENCE AND TECHNOLOGY",
+          "schoolName": "Enugu State University of Science and Technology"
+        },
+        {
+          "fellowshipName": "RCF ALEX-EKWUEME FED UNIVERSITY NDI-UFU EBONYI STATE",
+          "schoolName": "Alex-Ekwueme Federal University, Ndi-Ufu, Ebonyi State"
+        },
+        {
+          "fellowshipName": "RCF EBONYI STATE UNIVERSITY",
+          "schoolName": "Ebonyi State University"
+        },
+        {
+          "fellowshipName": "RCF COLLEGE OF MEDICINE ESUT PARK LANE",
+          "schoolName": "College of Medicine, ESUT Park Lane"
+        },
+        {
+          "fellowshipName": "RCF FED COLLEGE OF DENTAL",
+          "schoolName": "Federal College of Dental"
+        },
+        {
+          "fellowshipName": "RCF FED POLY UNWANA",
+          "schoolName": "Federal Polytechnic, Unwana"
+        },
+        {
+          "fellowshipName": "RCF INSTITUTE OF MANAGEMENT AND TECHNOLOGY ENUGU",
+          "schoolName": "Institute of Management and Technology, Enugu"
+        },
+        {
+          "fellowshipName": "RCCF ENUGU",
+          "schoolName": "Enugu"
+        },
+        {
+          "fellowshipName": "RCCF ABAKALIKI",
+          "schoolName": "Abakaliki"
+        },
+        {
+          "fellowshipName": "RCCF NSUKKA",
+          "schoolName": "Nsukka"
+        },
+        {
+          "fellowshipName": "RCCF OHAOZARA",
+          "schoolName": "Ohaozara"
+        }
+      ]
+    },
+    {
+      "zone": "OYO ZONE",
+      "institutions": [
+        {
+          "fellowshipName": "RCF LADOKE AKINTOLA UNIVERSITY OF TECHNOLOGY, OGBOMOSO",
+          "schoolName": "Ladoke Akintola University of Technology, Ogbomoso"
+        },
+        {
+          "fellowshipName": "RCF UNIVERSITY OF IBADAN",
+          "schoolName": "University of Ibadan"
+        },
+        {
+          "fellowshipName": "RCF THE POLYTECHNIC IBADAN",
+          "schoolName": "The Polytechnic Ibadan"
+        },
+        {
+          "fellowshipName": "RCF THE OKE-OGUN POLYTECHNIC, SAKI",
+          "schoolName": "The Oke-Ogun Polytechnic, Saki"
+        },
+        {
+          "fellowshipName": "RCF FEDERAL COLLEGE OF EDUCATION SPECIAL, OYO",
+          "schoolName": "Federal College of Education Special, Oyo"
+        },
+        {
+          "fellowshipName": "RCF ADESEUN OGUNDOYIN POLYTECHNIC, ERUWA",
+          "schoolName": "Adeseun Ogundoyin Polytechnic, Eruwa"
+        },
+        {
+          "fellowshipName": "RCF EMMANUEL ALAYANDE COLLEGE OF EDUCATION, OYO",
+          "schoolName": "Emmanuel Alayande College of Education, Oyo"
+        },
+        {
+          "fellowshipName": "RCF OYO STATE COLLEGE OF AGRICULTURE AND TECHNOLOGY, IGBOORA",
+          "schoolName": "Oyo State College of Agriculture and Technology, Igboora"
+        },
+        {
+          "fellowshipName": "RCF FEDERAL SCHOOL OF FORESTRY, IBADAN",
+          "schoolName": "Federal School of Forestry, Ibadan"
+        },
+        {
+          "fellowshipName": "RCF OYO STATE COLLEGE OF HEALTH SCIENCE AND TECHNOLOGY, ELEYELE",
+          "schoolName": "Oyo State College of Health Science and Technology, Eleyele"
+        },
+        {
+          "fellowshipName": "RCF ATIBA UNIVERSITY, OYO",
+          "schoolName": "Atiba University, Oyo"
+        },
+        {
+          "fellowshipName": "RCF FEDERAL COOPERATIVE COLLEGE, ELEYELE",
+          "schoolName": "Federal Cooperative College, Eleyele"
+        },
+        {
+          "fellowshipName": "RCF FEDERAL SCHOOL OF STATISTICS, SHASHA",
+          "schoolName": "Federal School of Statistics, Shasha"
+        },
+        {
+          "fellowshipName": "RCF THE TECHNICAL UNIVERSITY, IBADAN",
+          "schoolName": "The Technical University, Ibadan"
+        },
+        {
+          "fellowshipName": "RCF LEADS CITY UNIVERSITY, IBADAN",
+          "schoolName": "Leads City University, Ibadan"
+        },
+        {
+          "fellowshipName": "RCF UNIVERSITY TEACHING HOSPITAL, IBADAN",
+          "schoolName": "University Teaching Hospital, Ibadan"
+        },
+        {
+          "fellowshipName": "RCF OYO STATE COLLEGE OF EDUCATION, LANLATE",
+          "schoolName": "Oyo State College of Education, Lanlate"
+        },
+        {
+          "fellowshipName": "RCF NOUN UNIVERSITY, IBADAN",
+          "schoolName": "National Open University of Nigeria, Ibadan"
+        }
+      ]
+    },
+    {
+      "zone": "YOLA ZONE",
+      "institutions": [
+        {
+          "fellowshipName": "RCF MODDIBO ADAMA UNIVERSITY, YOLA",
+          "schoolName": "Modibbo Adama University of Technology, Yola"
+        },
+        {
+          "fellowshipName": "RCF ADAMAWA STATE UNIVERSITY, MUBI",
+          "schoolName": "Adamawa State University, Mubi"
+        },
+        {
+          "fellowshipName": "RCF FEDERAL POLYTECHNIC MUBI",
+          "schoolName": "Federal Polytechnic Mubi"
+        },
+        {
+          "fellowshipName": "RCF FEDERAL COLLEGE OF EDUCATION, YOLA",
+          "schoolName": "Federal College of Education, Yola"
+        },
+        {
+          "fellowshipName": "RCF TARABA STATE UNIVERSITY, JALINGO",
+          "schoolName": "Taraba State University, Jalingo"
+        },
+        {
+          "fellowshipName": "RCF FEDERAL UNIVERSITY WUKARI, STATE",
+          "schoolName": "Federal University Wukari, Taraba State"
+        }
+      ]
+    },
+    {
+      "zone": "SOKOTO ZONE",
+      "institutions": [
+        {
+          "fellowshipName": "RCCF SOKOTO",
+          "schoolName": "Sokoto, Nigeria"
+        },
+        {
+          "fellowshipName": "RCCF BIRNIN KEBBI",
+          "schoolName": "Birnin Kebbi, Nigeria"
+        },
+        {
+          "fellowshipName": "RCCF GUSAU ZAMFARA",
+          "schoolName": "Gusau, Zamfara, Nigeria"
+        },
+        {
+          "fellowshipName": "RCCF TAMAJE SOKOTO",
+          "schoolName": "Tamaje, Sokoto, Nigeria"
+        },
+        {
+          "fellowshipName": "RCCF ARUGUGU KEBBI",
+          "schoolName": "Arugugu, Kebbi, Nigeria"
+        },
+        {
+          "fellowshipName": "RCF WAZIRI KEBBI",
+          "schoolName": "Waziri, Kebbi, Nigeria"
+        },
+        {
+          "fellowshipName": "RCF KAURA ZAMFARA",
+          "schoolName": "Kaura, Zamfara, Nigeria"
+        },
+        {
+          "fellowshipName": "RCF ABDUL GUSAU ZAMFARA",
+          "schoolName": "Abdul Gusau, Zamfara, Nigeria"
+        },
+        {
+          "fellowshipName": "RCF FEDERAL UNIVERSITY GUSAU",
+          "schoolName": "Federal University Gusau, Zamfara, Nigeria"
+        },
+        {
+          "fellowshipName": "RCF USMAN DANFODIO SOKOTO",
+          "schoolName": "Usman Danfodio University, Sokoto, Nigeria"
+        }
+      ]
     }
   ]
 }
