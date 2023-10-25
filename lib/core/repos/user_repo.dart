@@ -65,14 +65,6 @@ class UserRepo implements FireStoreService {
     if (currentUser.exists) {
       final decodedData = currentUser.data();
       return PersonalDataForm.fromJson(decodedData!);
-      // showDialog(
-      //   context: context,
-      //   builder: (context) => const FlutterSuccessfulDialog(
-      //     title: "Successful",
-      //     subtitle: "Your details have been save successfully",
-      //     routeDes: SiteLayout(),
-      //   ),
-      // );
     } else {
       return null;
       // throw Exception('Could not fetch user');

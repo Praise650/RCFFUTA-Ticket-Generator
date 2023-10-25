@@ -41,23 +41,28 @@ class _GenerateQRPageState extends State<LoginPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    BaseButton(
-                      isBusy: model.isLoading,
-                      // width: 100,
-                      onPressed: () {
-                        model.loginAsAdmin(context);
-                      },
-                      btnText: 'Login As Admin',
-                      iconColor: AppColors.white,
+                    Expanded(
+                      child: BaseButton(
+                        isBusy: model.isAdminLoading,
+                        // width: 100,
+                        onPressed: () {
+                          model.loginAsAdmin();
+                        },
+                        btnText: 'Login As Admin',
+                        iconColor: AppColors.white,
+                      ),
                     ),
-                    BaseButton(
-                      isBusy: model.isLoading,
-                      // width: 100,
-                      onPressed: () {
-                        model.createAndSaveUser(context);
-                      },
-                      btnText: 'Login',
-                      iconColor: AppColors.white,
+                    const SizedBox(width: 10.0),
+                    Expanded(
+                      child: BaseButton(
+                        isBusy: model.isLoading,
+                        // width: 100,
+                        onPressed: () {
+                          model.createAndSaveUser();
+                        },
+                        btnText: 'Login',
+                        iconColor: AppColors.white,
+                      ),
                     ),
                   ],
                 ),

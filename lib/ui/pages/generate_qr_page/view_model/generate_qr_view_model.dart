@@ -1,5 +1,8 @@
+import 'dart:js_interop';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../../core/models/personal_data.dart';
 import '../../../../core/models/zone_model.dart';
@@ -7,6 +10,7 @@ import '../../../../core/repos/rcf_zones_repo.dart';
 import '../../../../core/service/firestore_service.dart';
 import '../../../../core/service/auth_service.dart';
 import '../../../../core/states/ticket_state.dart';
+import '../../../../utils/app_response.dart';
 import '../../../../utils/id_generator.dart';
 import '../../../../app/locator.dart';
 import '../../download_qr/download_qr.dart';
@@ -50,9 +54,9 @@ class GenerateQrViewModel extends ChangeNotifier {
     }
   }
 
-  void createAndSaveUser(BuildContext context) async {
-    if (saveAndValidate()) {
-      print("state of ${saveAndValidate()}");
+  void createAndSaveUser() async {
+    if (saveAndValidate() && isNotNull()) {
+      print("state of formKey: ${saveAndValidate()} and ${isNotNull()}");
       _isLoading = true;
       notifyListeners();
       try {
@@ -82,17 +86,12 @@ class GenerateQrViewModel extends ChangeNotifier {
           _fService
               .uploadMemberInformation(personalDataForm.toJson(), user?.uid)
               .then(
-                (value) =>Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DownloadQRPage(
+                (value) =>Get.off(() => DownloadQRPage(
                       userId: user!.uid.toString(),
-                    ),
                   ),
                 ),
               );
         }
-        // _userRepo.createUser(toJson,context);
         notifyListeners();
       } catch (e) {
         notifyListeners();
@@ -101,7 +100,7 @@ class GenerateQrViewModel extends ChangeNotifier {
       }
     } else {
       print("Error can't save data");
-      // AppResponse.showErrorMessage("Error cant create user");
+      AppResponse.error("Error cant create user, Please fill all field");
       _isLoading = false;
       notifyListeners();
       return;
@@ -111,6 +110,16 @@ class GenerateQrViewModel extends ChangeNotifier {
   bool saveAndValidate() {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
+      return true;
+    }
+    return false;
+  }
+
+  bool isNotNull() {
+    if (selectedZone != null &&
+    selectedInstitution!.isNotEmpty &&
+    selectedUnit!.isNotEmpty &&
+    selectedPortfolio!.isNotEmpty) {
       return true;
     }
     return false;
