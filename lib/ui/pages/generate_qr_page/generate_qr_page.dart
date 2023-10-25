@@ -1,17 +1,20 @@
 import 'dart:js_interop';
 
-import 'package:provider/provider.dart';
-import 'package:rcf_attendance_generator/ui/pages/auth/login.dart';
-import 'package:rcf_attendance_generator/ui/styles/color.dart';
 import 'package:flutter/material.dart';
-import '../../../core/states/ticket_state.dart';
+import 'package:provider/provider.dart';
+
+import '../../../app/images.dart';
 import '../../layouts/base_scaffold.dart';
 import '../../layouts/scrollable_base_scaffold_body.dart';
+import '../../styles/color.dart';
+import '../../styles/texts.dart';
 import '../../widgets/buttons/base_button.dart';
-import '../../widgets/custom_institution_dropdown.dart';
-import '../../widgets/custom_zone_dropdown.dart';
+import '../../widgets/drop_downs/custom_institution_dropdown.dart';
+import '../../widgets/drop_downs/custom_units_dropdown.dart';
+import '../../widgets/drop_downs/custom_zone_dropdown.dart';
 import '../../widgets/input/general_input.dart';
 import '../../widgets/radio_widget.dart';
+import '../auth/login.dart';
 import 'view_model/generate_qr_view_model.dart';
 
 class GenerateQRPage extends StatefulWidget {
@@ -32,17 +35,34 @@ class _GenerateQRPageState extends State<GenerateQRPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<GenerateQrViewModel>(builder: (context, model, _) {
-      return BaseScaffold(
-          body: model.isLoading == true
-              ? const Center(child: CircularProgressIndicator())
-              : ScrollableBaseScaffoldBody(
-                  body: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 11),
-                    child: Form(
+    return Consumer<GenerateQrViewModel>(
+      builder: (context, model, _) {
+        return BaseScaffold(
+          body: ScrollableBaseScaffoldBody(
+            body: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 11),
+              child: model.isLoading == true
+                  ? const Center(child: CircularProgressIndicator())
+                  : Form(
                       key: model.formKey,
                       child: Column(
                         children: [
+                          Row(
+                            children: [
+                              Image.asset(
+                                AppImages.crmLogo,
+                                width: 70,
+                                height: 100,
+                              ),
+                              const SizedBox(width: 10),
+                              Text(
+                                "LTP 2023 Registration".toUpperCase(),
+                                style: kHeadline1TextStyle.copyWith(
+                                  color: AppColors.textSecondary,
+                                ),
+                              ),
+                            ],
+                          ),
                           GeneralInput(
                             appContext: context,
                             hintText: 'Praise',
@@ -72,41 +92,48 @@ class _GenerateQRPageState extends State<GenerateQRPage> {
                             value: model.gender,
                             textValue: const ['Male', 'Female'],
                           ),
-                          CustomDropdown(
+                          CustomZoneDropdown(
                             label: "Zone",
                             appContext: context,
                             hintText: 'Select a zone',
                           ),
-                          model.selectedRcfZone.isNull
+                          model.selectedZone.isNull
                               ? const SizedBox.shrink()
                               : CustomInstitutionDropdown(
-                                hintText: "Select an Institution",
-                                onChanged:  (String? newValue) {
-                                setState(() {
-                                  model.selectedInstitution = newValue;
-                                  print(model.selectedInstitution);
-                                });
-                              },
-                                value: model.selectedRcfZone!.institutions!,
-                                appContext: context,
-                                selectedInstitution: model.selectedInstitution,
-                                label: "Institution"),
-                          GeneralInput(
+                                  appContext: context,
+                                  label: "Institution",
+                                  hintText: "Select an Institution",
+                                  onChanged: (String? value) => setState(() {
+                                    model.selectedInstitution = value;
+                                    print(model.selectedInstitution);
+                                  }),
+                                  value: model.selectedZone!.institutions!,
+                                  selectedInstitution:
+                                      model.selectedInstitution,
+                                ),
+                          CustomUnitDropdown(
                             appContext: context,
-                            label: 'Unit',
-                            controller: model.unit,
-                            hintText: 'Editorial Unit'),
-                          GeneralInput(
-                            appContext: context,
-                            label: 'Worker/Executive',
-                            hintText: 'Executive',
-                            controller: model.workerOrExec,
+                            label: 'Member / Worker',
+                            hintText: 'Editorial Unit',
+                            value: model.zonesRepo.units,
+                            selectedUnit: model.selectedUnit,
+                            onChanged: (String? value) => setState(() {
+                              model.selectedUnit = value;
+                              print(model.selectedUnit);
+                            }),
                           ),
-                          GeneralInput(
+                          CustomUnitDropdown(
                             appContext: context,
                             label: 'PortFolio (For Executives)',
                             hintText: 'Portfolio',
-                            controller: model.portfolio,
+                            value: model.zonesRepo.positions,
+                            selectedUnit: model.selectedPortfolio,
+                            onChanged: (String? value) {
+                              setState(() {
+                                model.selectedPortfolio = value;
+                                print(model.selectedPortfolio);
+                              });
+                            },
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -116,10 +143,11 @@ class _GenerateQRPageState extends State<GenerateQRPage> {
                                 width: 100,
                                 onPressed: () {
                                   Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const LoginPage()));
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const LoginPage(),
+                                    ),
+                                  );
                                 },
                                 iconColor: AppColors.white,
                                 child: const Padding(
@@ -147,8 +175,10 @@ class _GenerateQRPageState extends State<GenerateQRPage> {
                         ],
                       ),
                     ),
-                  ),
-                ));
-    });
+            ),
+          ),
+        );
+      },
+    );
   }
 }

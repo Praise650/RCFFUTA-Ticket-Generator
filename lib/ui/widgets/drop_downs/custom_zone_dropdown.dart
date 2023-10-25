@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rcf_attendance_generator/ui/pages/generate_qr_page/view_model/generate_qr_view_model.dart';
 
-import '../../core/models/zone_model.dart';
-import '../styles/color.dart';
-import '../styles/dimens.dart';
-import '../styles/texts.dart';
+import '../../../core/models/zone_model.dart';
+import '../../styles/color.dart';
+import '../../styles/dimens.dart';
+import '../../styles/texts.dart';
 
-class CustomDropdown extends StatefulWidget {
-  const CustomDropdown(
+class CustomZoneDropdown extends StatefulWidget {
+  const CustomZoneDropdown(
       {super.key,
       this.label,
       this.focusNode,
@@ -29,10 +29,10 @@ class CustomDropdown extends StatefulWidget {
   final Color? fillColor;
 
   @override
-  State<CustomDropdown> createState() => _CustomDropdownState();
+  State<CustomZoneDropdown> createState() => _CustomZoneDropdownState();
 }
 
-class _CustomDropdownState extends State<CustomDropdown> {
+class _CustomZoneDropdownState extends State<CustomZoneDropdown> {
   
   late FocusNode _focusNode;
   bool activeErrorState = false;
@@ -96,14 +96,14 @@ class _CustomDropdownState extends State<CustomDropdown> {
                     ? const EdgeInsets.only(top: 8.0, bottom: 4.0)
                     : widget.margin,
                 decoration: BoxDecoration(
-                  color: _focusNode.hasFocus || model.selectedRcfZone.isDefinedAndNotNull
+                  color: _focusNode.hasFocus || model.selectedZone.isDefinedAndNotNull
                       ? AppColors.fieldColor
                       : widget.fillColor,
                   borderRadius: BorderRadius.circular(Dimens.inputFieldRadius),
-                  border: border(model.rcfZonesList),
+                  border: border(model.zonesRepo.zones),
                 ),
                 child: DropdownButton<RcfZones>(
-                  value: model.selectedRcfZone,
+                  value: model.selectedZone,
                   focusNode: _focusNode,
                   onTap: () {
                     // if (widget.onTap != null) widget.onTap!();
@@ -115,11 +115,11 @@ class _CustomDropdownState extends State<CustomDropdown> {
                   isExpanded: true,
                   hint: Text(widget.hintText.toString()),
                   onChanged: (RcfZones? newValue) {
-                      model.selectedRcfZone = newValue;
-                      print("Selected Zone ${model.selectedRcfZone!.zone!}");
+                      model.selectedZone = newValue;
+                      print("Selected Zone ${model.selectedZone!.zone!}");
                       model.updateInstitution();
                   },
-                  items: model.rcfZonesList
+                  items: model.zonesRepo.zones
                       .map<DropdownMenuItem<RcfZones>>((RcfZones value) {
                     return DropdownMenuItem<RcfZones>(
                       value: value,
