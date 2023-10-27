@@ -1,12 +1,10 @@
 // ignore_for_file: avoid_print
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:get/get.dart';
 
 import '../../core/service/navigator_service.dart';
 import '../../core/service/auth_service.dart';
 import '../../routes/app_routes.dart';
-import '../../routes/routes.dart';
 import '../../utils/app_response.dart';
 import '../errors/firebase_auth_error.dart';
 import '../service/firestore_service.dart';
@@ -34,10 +32,7 @@ class AuthRepo implements AuthService {
           if (userDataCreated != null && userDataCreated.id == user.uid) {
             print(userDataCreated.email);
             AppResponse.success("Login Successful");
-            Get.off(() => DownloadQRPage(
-                  userId: userDataCreated.id!,
-              ),
-            );
+            _navigationService.navigateToDownloadQrPage(args:userDataCreated.id!);
           } else {
             print('Could not find user');
             AppResponse.error("Invalid data: Could not find user");

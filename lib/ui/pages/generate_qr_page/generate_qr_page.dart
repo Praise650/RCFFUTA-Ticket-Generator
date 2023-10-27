@@ -107,7 +107,7 @@ class _GenerateQRPageState extends State<GenerateQRPage> {
                                   hintText: "Select an Institution",
                                   onChanged: (String? value) => setState(() {
                                     model.selectedInstitution = value;
-                                    print(model.selectedInstitution);
+                                    debugPrint(model.selectedInstitution);
                                   }),
                                   value: model.selectedZone!.institutions!,
                                   selectedInstitution:
