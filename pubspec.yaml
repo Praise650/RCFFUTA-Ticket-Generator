@@ -13,8 +13,10 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.2
   qr_flutter: ^4.1.0
-#  path_provider: ^2.1.1
+
+
   flutter_svg: ^2.0.7
+  file_picker: ^6.0.0
   flutter_hooks: ^0.20.3
   intl: ^0.18.1
   universal_html: ^2.2.4
@@ -38,6 +40,10 @@ dependencies:
 #  image to widget
   pdf: ^3.10.4
   screenshot: ^2.1.0
+  printing: ^5.11.0
+
+#  path to dir
+  path_provider: ^2.1.1
 
 dev_dependencies:
   flutter_test:

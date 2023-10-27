@@ -1,5 +1,5 @@
 import 'package:get_it/get_it.dart';
-import '../core/service/download_qr_service.dart';
+import '../core/service/download_ticket_service.dart';
 import '../core/repos/download_ticket_repo.dart';
 import '../core/service/navigator_service.dart';
 import '../core/service/firestore_service.dart';

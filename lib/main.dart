@@ -2,10 +2,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:rcf_attendance_generator/app/locator.dart';
-import 'package:rcf_attendance_generator/core/service/navigator_service.dart';
-import 'package:rcf_attendance_generator/routes/app_routes.dart';
 
+import 'app/locator.dart';
+import 'core/service/navigator_service.dart';
+import 'routes/app_routes.dart';
+import 'routes/route_manager.dart';
 import 'ui/pages/auth/view_model/login_controller.dart';
 import 'ui/pages/display_attendee/view_model/list_member_controller.dart';
 import 'ui/pages/download_qr/controller/download_qr_controller.dart';
@@ -65,7 +66,8 @@ class _MyAppState extends State<MyApp> {
               initialRoute: AppRoutes.generateQrPage,
               debugShowCheckedModeBanner: false,
               navigatorKey: locator<NavigatorService>().navigatorKey,
-              routes: AppRoutes.routes,
+              // routes: AppRoutes.routes,
+              onGenerateRoute: RouteManager.generateRoutes,
             ),
           );
         }

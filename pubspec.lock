@@ -177,6 +177,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.0"
+  file_picker:
+    dependency: "direct main"
+    description:
+      name: file_picker
+      sha256: "903dd4ba13eae7cef64acc480e91bf54c3ddd23b5b90b639c170f3911e489620"
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.0.0"
   firebase_auth:
     dependency: "direct main"
     description:
@@ -270,6 +278,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.2"
+  flutter_plugin_android_lifecycle:
+    dependency: transitive
+    description:
+      name: flutter_plugin_android_lifecycle
+      sha256: b068ffc46f82a55844acfa4fdbb61fad72fa2aef0905548419d97f0f95c456da
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.17"
   flutter_svg:
     dependency: "direct main"
     description:
@@ -417,7 +433,7 @@ packages:
     source: hosted
     version: "1.0.1"
   path_provider:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: path_provider
       sha256: a1aa8aaa2542a6bc57e381f132af822420216c80d4781f7aa085ca3229208aaa
@@ -504,6 +520,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.7.3"
+  printing:
+    dependency: "direct main"
+    description:
+      name: printing
+      sha256: e7c383dca95ee7b88c02dc1c66638628d3dcdc2fb2cc47e7a595facd47e46b56
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.11.0"
   provider:
     dependency: "direct main"
     description:
