@@ -10,7 +10,7 @@ import '../../styles/texts.dart';
 class CustomInstitutionDropdown extends StatefulWidget {
   final Function(String?) onChanged;
 
-  CustomInstitutionDropdown(
+  const CustomInstitutionDropdown(
       {super.key,
       this.label,
       this.focusNode,
@@ -26,7 +26,7 @@ class CustomInstitutionDropdown extends StatefulWidget {
   final bool autoUnFocus;
   final BuildContext appContext;
   final Color? fillColor;
-  String? selectedInstitution;
+  final String? selectedInstitution;
   final List<Institution> value;
 
   @override

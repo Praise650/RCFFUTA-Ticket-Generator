@@ -19,6 +19,7 @@ class PersonalDataForm {
   final DateTime? createdAt;
   final DateTime? updatedAt;
   final bool? attending;
+  final bool? isAdmin;
 
   PersonalDataForm({
     this.fullname,
@@ -37,7 +38,8 @@ class PersonalDataForm {
     this.imageUrl,
     this.createdAt,
     this.updatedAt,
-    this.attending
+    this.attending,
+    this.isAdmin,
   });
 
   factory PersonalDataForm.fromJson(Map<String, dynamic> json) =>
@@ -58,6 +60,7 @@ class PersonalDataForm {
 
         // paremeters to be added later
         attending: json['attending'] as bool?,
+        isAdmin: json['isAdmin'] as bool?,
         createdAt: json["createdAt"] != null
             ? DateTime.parse(json["createdAt"] as String)
             : null,
@@ -82,6 +85,7 @@ class PersonalDataForm {
         'uuid':uuid,
         'imageUrl': imageUrl,
         'attending':attending,
+        'isAdmin':isAdmin,
 
         //parameters that can be used later 
         'id': id,

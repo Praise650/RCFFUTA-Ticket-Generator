@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/service/auth_service.dart';
 import '../../../../app/locator.dart';
-import '../../download_qr/download_qr.dart';
+import '../../../../utils/app_response.dart';
 
 class AuthViewModel extends ChangeNotifier {
   final _authService = locator<AuthService>();
@@ -13,24 +13,16 @@ class AuthViewModel extends ChangeNotifier {
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
+  bool _isAdminLoading = false;
+  bool get isAdminLoading => _isAdminLoading;
 
-  void createAndSaveUser(context) async {
+  void createAndSaveUser() async {
     if (saveAndValidate()) {
       _isLoading = true;
       notifyListeners();
       try {
-        final userDataCreated = await _authService.login(
+        await _authService.login(
             email: email.text, password: lastname.text);
-        if (userDataCreated != null) {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => DownloadQRPage(
-                userId: userDataCreated.id!,
-              ),
-            ),
-          );
-        }
         _isLoading = false;
         notifyListeners();
       } catch (e) {
@@ -40,29 +32,29 @@ class AuthViewModel extends ChangeNotifier {
       }
     } else {
       print("Error the field cannot be empty");
-      // AppResponse.showErrorMessage("Error cant create user");
+      AppResponse.error("Field cannot be empty");
       _isLoading = false;
       notifyListeners();
       return;
     }
   }
-  void loginAsAdmin(context) async {
+  void loginAsAdmin() async {
     if (saveAndValidate()) {
-      _isLoading = true;
+      _isAdminLoading = true;
       notifyListeners();
       try {
         await _authService.loginAsAdmin(
             email: email.text, password: lastname.text);
-        _isLoading = false;
+        _isAdminLoading = false;
         notifyListeners();
       } catch (e) {
         notifyListeners();
-        _isLoading = false;
+        _isAdminLoading = false;
         print(e);
       }
     } else {
       print("Error the field cannot be empty");
-      // AppResponse.showErrorMessage("Error cant create user");
+      AppResponse.error("Error the field cannot be empty");
       _isLoading = false;
       notifyListeners();
       return;

@@ -1,8 +1,11 @@
+// ignore_for_file: avoid_print
+
 import 'dart:typed_data';
 import 'dart:js_interop';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:rcf_attendance_generator/utils/app_response.dart';
 import 'dart:ui';
 
 import '../../../../core/service/download_qr_service.dart';
@@ -14,8 +17,6 @@ import '../../../../app/locator.dart';
 class DownloadQrController extends ChangeNotifier {
   final _fService = locator<FireStoreService>();
   final _downloadService = locator<DownloadTicketService>();
-  //Create an instance of ScreenshotController
-  // ScreenshotController screenshotController = ScreenshotController();
 
   PersonalDataForm? user;
   ITicketState state = ITicketState();
@@ -42,6 +43,7 @@ class DownloadQrController extends ChangeNotifier {
         bytes: bytes!,
       );
       print("Upload successful");
+
     } catch (e) {
       print(e);
     }
@@ -93,17 +95,13 @@ class DownloadQrController extends ChangeNotifier {
       Uint8List pngBytes = byteData!.buffer.asUint8List();
       uploadTicket(pngBytes);
       print("Image downloaded");
+      AppResponse.success("Download Successful");
       state = SuccessTicketState();
       notifyListeners();
-      // if(!mounted)return;
-      // const snackBar = SnackBar(content: Text('QR code saved to gallery'));
-      // ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }catch(e){
       state = FailureTicketState();
+      AppResponse.error("Failed to download, Please try again");
       notifyListeners();
-      // if(!mounted)return;
-      // const snackBar = SnackBar(content: Text('Something went wrong!!!'));
-      // ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
   }
 }

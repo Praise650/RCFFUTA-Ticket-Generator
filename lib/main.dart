@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:rcf_attendance_generator/app/locator.dart';
 import 'package:rcf_attendance_generator/core/service/navigator_service.dart';
@@ -57,9 +58,10 @@ class _MyAppState extends State<MyApp> {
               ChangeNotifierProvider(create: (_) => AuthViewModel()),
               ChangeNotifierProvider(create: (_) => DispController()),
             ],
-            child: MaterialApp(
+            child: GetMaterialApp(
               // builder: (context,snaps){},
               // home: GenerateQRPage(),
+              title: "CRM LTP Registration",
               initialRoute: AppRoutes.generateQrPage,
               debugShowCheckedModeBanner: false,
               navigatorKey: locator<NavigatorService>().navigatorKey,

@@ -1,15 +1,14 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
-import 'package:rcf_attendance_generator/ui/widgets/download_qr/mobile_view.dart';
 
-import '../../widgets/download_qr/desktop_view.dart';
-import '../../widgets/download_ticket/infos_right_widget.dart';
-import '../../widgets/download_ticket/form_left_widget.dart';
+
 import 'package:rcf_attendance_generator/app/images.dart';
+import 'package:rcf_attendance_generator/utils/app_response.dart';
+import '../../widgets/download_qr/mobile_view.dart';
 import '../../../core/states/ticket_state.dart';
-import '../../widgets/loader.dart';
 import 'controller/download_qr_controller.dart';
 import 'package:provider/provider.dart';
+import '../../widgets/loader.dart';
 import '../../styles/color.dart';
 
 class DownloadQRPage extends StatefulWidget {
@@ -36,7 +35,7 @@ class _DownloadQRPageState extends State<DownloadQRPage> {
       await context.read<DownloadQrController>().getProfile(widget.userId);
     } catch (e) {
       print(e);
-      // Messenger.error(e.message);
+      AppResponse.error(e.toString());
     }
   }
 

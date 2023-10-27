@@ -55,10 +55,12 @@ class _GenerateQRPageState extends State<GenerateQRPage> {
                                 height: 100,
                               ),
                               const SizedBox(width: 10),
-                              Text(
-                                "LTP 2023 Registration".toUpperCase(),
-                                style: kHeadline1TextStyle.copyWith(
-                                  color: AppColors.textSecondary,
+                              Expanded(
+                                child: Text(
+                                  "LTP 2023 Registration".toUpperCase(),
+                                  style: kHeadline1TextStyle.copyWith(
+                                    color: AppColors.textSecondary,
+                                  ),
                                 ),
                               ),
                             ],
@@ -164,7 +166,7 @@ class _GenerateQRPageState extends State<GenerateQRPage> {
                                 isBusy: model.isLoading,
                                 width: 100,
                                 onPressed: () {
-                                  model.createAndSaveUser(context);
+                                  model.createAndSaveUser();
                                 },
                                 icon: Icons.east_outlined,
                                 iconColor: AppColors.white,

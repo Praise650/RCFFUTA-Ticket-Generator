@@ -1,10 +1,14 @@
+// ignore_for_file: avoid_print
+
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get/get.dart';
 
 import '../../core/service/navigator_service.dart';
 import '../../core/service/auth_service.dart';
 import '../../routes/app_routes.dart';
+import '../../routes/routes.dart';
+import '../../utils/app_response.dart';
 import '../errors/firebase_auth_error.dart';
-import '../models/personal_data.dart';
 import '../service/firestore_service.dart';
 import '../../app/locator.dart';
 
@@ -14,7 +18,7 @@ class AuthRepo implements AuthService {
   final _navigationService = locator<NavigatorService>();
 
   @override
-  Future<PersonalDataForm?> login({String? email, String? password}) async {
+  Future<void> login({String? email, String? password}) async {
     User? user;
     try {
       if (email != null && password != null) {
@@ -29,36 +33,51 @@ class AuthRepo implements AuthService {
           print(userDataCreated.toString());
           if (userDataCreated != null && userDataCreated.id == user.uid) {
             print(userDataCreated.email);
-            return userDataCreated;
+            AppResponse.success("Login Successful");
+            Get.off(() => DownloadQRPage(
+                  userId: userDataCreated.id!,
+              ),
+            );
           } else {
             print('Could not find user');
+            AppResponse.error("Invalid data: Could not find user");
+            return;
           }
         } else {
-          throw Exception('Could not find user');
+          AppResponse.error("Failed, could not find user");
+          return;
         }
-      }
+      } else return;
     } on FirebaseAuthError catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
+        AppResponse.error("The password provided is too weak.");
       } else if (e.code == 'email-already-in-use') {
         print('The account already exists for that email.');
+        AppResponse.error("The account already exists for that email.");
       } else if (e.code == 'user-not-found') {
+        AppResponse.error("There is no user record corresponding to the email entered.");
         throw ('There is no user record corresponding to the email entered.');
       } else if (e.code == 'invalid-email') {
+        AppResponse.error("The email address is badly formatted!");
         throw ('The email address is badly formatted!');
       } else if (e.code == "network-request-failed") {
+        AppResponse.error("The password provided is too weak.");
         throw ('The password provided is too weak.');
       } else if (e.code == "wrong-password") {
+        AppResponse.error("The password provided is incorrect.");
         throw ('The password provided is incorrect.');
       }
     } catch (e) {
       print(e);
+      AppResponse.error('Failed, please check details and try again');
+      return;
     }
-    return null;
+    return;
   }
 
   @override
-  Future<PersonalDataForm?> loginAsAdmin(
+  Future<void> loginAsAdmin(
       {String? email, String? password}) async {
     User? user;
     try {
@@ -71,7 +90,20 @@ class AuthRepo implements AuthService {
         if (user != null) {
           print("Logging in: ${user.uid}");
           final userDataCreated = await _fsService.checkAdminToLogin(user.uid);
-          _navigationService.replace(AppRoutes.listUserPage);
+          print(userDataCreated.toString());
+          if (userDataCreated != null && userDataCreated.id == user.uid) {
+            print(userDataCreated.email);
+            AppResponse.success("Login Successful");
+            _navigationService.replace(AppRoutes.listUserPage);
+          } else {
+            print('Could not find user');
+            AppResponse.error("Invalid data: Could not find user");
+            return;
+          }
+        } else {
+          AppResponse.error("Failed, could not find user");
+          return;
+        }
           /// create array to save admin login session using setOptions on firebase
           // DateTime now = DateTime.now();
           // final snapshot =
@@ -87,36 +119,38 @@ class AuthRepo implements AuthService {
           //   print("Login successful");
           //   // firestoreService.setUser(snapshot.data() as Map<String, dynamic>);
           // }
-          print(userDataCreated!.email);
-          return userDataCreated;
-        } else {
-          throw Exception('Could not find user');
-        }
-      }
+      } else return;
     } on FirebaseAuthError catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
+        AppResponse.error("The password provided is too weak.");
       } else if (e.code == 'email-already-in-use') {
         print('The account already exists for that email.');
+        AppResponse.error("The account already exists for that email.");
       } else if (e.code == 'user-not-found') {
+        AppResponse.error("There is no user record corresponding to the email entered.");
         throw ('There is no user record corresponding to the email entered.');
       } else if (e.code == 'invalid-email') {
+        AppResponse.error("The email address is badly formatted!");
         throw ('The email address is badly formatted!');
       } else if (e.code == "network-request-failed") {
+        AppResponse.error("The password provided is too weak.");
         throw ('The password provided is too weak.');
       } else if (e.code == "wrong-password") {
+        AppResponse.error("The password provided is incorrect.");
         throw ('The password provided is incorrect.');
       }
     } catch (e) {
       print(e);
+      AppResponse.error('Failed, please check details and try again');
     }
-    return null;
+    return;
   }
 
   @override
   Future<User?> register({
     String? email,
-    String? password,
+    String? password
   }) async {
     User? user;
     try {
@@ -128,6 +162,7 @@ class AuthRepo implements AuthService {
         );
         user = userCredential.user;
         if (user != null) {
+          AppResponse.success("Login Successful");
           // if (snapshot.exists) {
           //   print("Login successful");
           //   // firestoreService.setUser(snapshot.data() as Map<String, dynamic>);
