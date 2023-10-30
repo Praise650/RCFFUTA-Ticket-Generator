@@ -6,8 +6,8 @@ import '../../layouts/scrollable_base_scaffold_body.dart';
 import '../../pages/download_qr/controller/download_qr_controller.dart';
 import '../../styles/color.dart';
 import '../../styles/texts.dart';
-import '../download_ticket/form_left_widget.dart';
-import '../download_ticket/infos_right_widget.dart';
+import 'form_left_widget.dart';
+import 'infos_right_widget.dart';
 
 class DownloadQrDesktopView extends StatelessWidget {
   const DownloadQrDesktopView({
@@ -52,7 +52,7 @@ class DownloadQrDesktopView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Expanded(
-                    child: FormLeft(
+                    child: FormLeftWidget(
                       linearGradient: AppColors.linearGradient,
                       constraints: constraints,
                       controller: controller,

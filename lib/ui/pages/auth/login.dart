@@ -5,6 +5,7 @@ import '../../layouts/base_scaffold.dart';
 import '../../layouts/scrollable_base_scaffold_body.dart';
 import '../../widgets/buttons/base_button.dart';
 import '../../widgets/input/general_input.dart';
+import '../../widgets/loader.dart';
 import 'view_model/login_controller.dart';
 
 class LoginPage extends StatefulWidget {
@@ -26,6 +27,8 @@ class _GenerateQRPageState extends State<LoginPage> {
             key: model.login,
             child: Column(
               children: [
+                showInfo(),
+                const SizedBox(height:10),
                 GeneralInput(
                   appContext: context,
                   hintText: 'ayokanmi12@gmail.com',

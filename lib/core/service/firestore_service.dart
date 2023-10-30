@@ -7,6 +7,7 @@ abstract class FireStoreService {
   Future<PersonalDataForm> getCurrentUser(String userId);
   Future<PersonalDataForm?> checkToLogin(String userId);
   Future<PersonalDataForm?> checkAdminToLogin(String userId);
+  Future<void> updateMemberInformation(Map<String, dynamic> jsonData, uid);
   Future<void> uploadMemberInformation(Map<String, dynamic> jsonData, uid);
   Future<void> saveDataAsJson(List<Map<String, String>> list);
   Future<bool> checkUserIsCreated(String userId);

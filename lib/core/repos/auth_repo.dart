@@ -26,7 +26,7 @@ class AuthRepo implements AuthService {
         );
         user = userCredential.user;
         if (user != null) {
-          print("Logging in: ${user.uid} and ${user.email}");
+          print("Logging in as: ${user.email}");
           final userDataCreated = await _fsService.checkToLogin(user.uid);
           print(userDataCreated.toString());
           if (userDataCreated != null && userDataCreated.id == user.uid) {
@@ -164,7 +164,7 @@ class AuthRepo implements AuthService {
           // }
           return user;
         } else {
-          throw Exception('Could not find user');
+          AppResponse.success("Could not find user");
         }
       }
     } on FirebaseAuthException catch (e) {

@@ -2,22 +2,22 @@ import 'dart:js_interop';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import '../../../../core/models/personal_data.dart';
 import '../../../../core/models/zone_model.dart';
 import '../../../../core/repos/rcf_zones_repo.dart';
 import '../../../../core/service/firestore_service.dart';
 import '../../../../core/service/auth_service.dart';
+import '../../../../core/service/navigator_service.dart';
 import '../../../../core/states/ticket_state.dart';
 import '../../../../utils/app_response.dart';
 import '../../../../utils/id_generator.dart';
 import '../../../../app/locator.dart';
-import '../../download_qr/download_qr.dart';
 
 class GenerateQrViewModel extends ChangeNotifier {
   final _authService = locator<AuthService>();
   final _fService = locator<FireStoreService>();
+  final _navigationService = locator<NavigatorService>();
   final RcfZonesRepo _zonesRepo = RcfZonesRepo();
   RcfZonesRepo get zonesRepo => _zonesRepo;
   ITicketState state = ITicketState();
@@ -33,7 +33,6 @@ class GenerateQrViewModel extends ChangeNotifier {
   String? selectedUnit;
   String? selectedPortfolio;
 
-
   final formKey = GlobalKey<FormState>();
 
   bool _isLoading = false;
@@ -44,7 +43,7 @@ class GenerateQrViewModel extends ChangeNotifier {
     notifyListeners();
     try {
       await _zonesRepo.fetchData();
-        notifyListeners();
+      notifyListeners();
       _isLoading = false;
       notifyListeners();
     } catch (e) {
@@ -73,12 +72,13 @@ class GenerateQrViewModel extends ChangeNotifier {
           zone: selectedZone!.zone,
           fellowshipName: selectedInstitution,
           unit: selectedUnit,
-          portfolio: selectedPortfolio??'Nil',
+          portfolio: selectedPortfolio ?? 'Nil',
           uuid:
               IDGenerator.createId(firstname.text, lastname.text).toUpperCase(),
           createdAt: DateTime.now(),
           updatedAt: DateTime.now(),
           attending: false,
+          isAdmin: false,
         );
         notifyListeners();
         print("PersonalDataForm: ${personalDataForm.toJson()}");
@@ -86,9 +86,8 @@ class GenerateQrViewModel extends ChangeNotifier {
           _fService
               .uploadMemberInformation(personalDataForm.toJson(), user?.uid)
               .then(
-                (value) =>Get.off(() => DownloadQRPage(
-                      userId: user!.uid.toString(),
-                  ),
+                (value) => _navigationService.navigateToDownloadQrPage(
+                  args: user!.uid.toString(),
                 ),
               );
         }
@@ -117,9 +116,9 @@ class GenerateQrViewModel extends ChangeNotifier {
 
   bool isNotNull() {
     if (selectedZone != null &&
-    selectedInstitution!.isNotEmpty &&
-    selectedUnit!.isNotEmpty &&
-    selectedPortfolio!.isNotEmpty) {
+        selectedInstitution!.isNotEmpty &&
+        selectedUnit!.isNotEmpty &&
+        selectedPortfolio!.isNotEmpty) {
       return true;
     }
     return false;
