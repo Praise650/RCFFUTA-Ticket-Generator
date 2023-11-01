@@ -1177,6 +1177,51 @@
           "schoolName": "Usman Danfodio University, Sokoto, Nigeria"
         }
       ]
+    },
+    {
+      "zone": "DELTA ZONE",
+      "institutions": [
+        {
+          "fellowshipName": "RCF DELTA STATE POLYTECHNIC OTEFE OGHARA,DELTA STATE",
+          "schoolName": "DELTA STATE POLYTECHNIC OTEFE OGHARA,DELTA STATE"
+        },
+        {
+          "fellowshipName": "RCF DELTA STATE UNIVERSITY ABRAKA, DELTA STATE",
+          "schoolName": "DELTA STATE UNIVERSITY ABRAKA, DELTA STATE"
+        },
+        {
+          "fellowshipName": "RCF DELTA STATE COLLEGE OF EDUCATION MOSOGAR, DELTA STATE",
+          "schoolName": "DELTA STATE COLLEGE OF EDUCATION MOSOGAR, DELTA STATE"
+        },
+        {
+          "fellowshipName": "RCCF FAMILY HOUSE ASABA, DELTA STATE",
+          "schoolName": "FAMILY HOUSE ASABA, DELTA STATE"
+        },
+        {
+          "fellowshipName": "RCCF FAMILY HOUSE WARRI, DELTA STATE",
+          "schoolName": "FAMILY HOUSE WARRI, DELTA STATE"
+        },
+        {
+          "fellowshipName": "RCF COLLEGE OF EDUCATION WARRI, DELTA STATE",
+          "schoolName": "COLLEGE OF EDUCATION WARRI, DELTA STATE"
+        },
+        {
+          "fellowshipName": "RCF UNIVERSITY OF DELTA STATE, AGBOR, DELTA STATE",
+          "schoolName": "UNIVERSITY OF DELTA STATE, AGBOR, DELTA STATE"
+        },
+        {
+          "fellowshipName": "RCF PETROLEUM TRAINING INSTITUTE PTI, WARRI, DELTA STATE",
+          "schoolName": "PETROLEUM TRAINING INSTITUTE PTI, WARRI, DELTA STATE"
+        },
+        {
+          "fellowshipName": "RCF FEDERAL UNIVERSITY OF PETROLEUM RESOURCES EFFURUN, DELTA STATE",
+          "schoolName": "FEDERAL UNIVERSITY OF PETROLEUM RESOURCES EFFURUN, DELTA STATE"
+        },
+        {
+          "fellowshipName": "RCF NOVENA UNIVERSITY AMAI OGUME, DELTA STATE",
+          "schoolName": "NOVENA UNIVERSITY AMAI OGUME, DELTA STATE"
+        }
+      ]
     }
   ]
 }
