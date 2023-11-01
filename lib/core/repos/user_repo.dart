@@ -84,6 +84,12 @@ class UserRepo implements FireStoreService {
   }
 
   @override
+  Future<void> updateMemberInformation(
+      Map<String, dynamic> jsonData, uid) async {
+    await _fsInstance.collection(membersCollectionPath).doc(uid).update(jsonData);
+  }
+  
+  @override
   Future<void> uploadMemberInformation(
       Map<String, dynamic> jsonData, uid) async {
     await _fsInstance.collection(membersCollectionPath).doc(uid).set(jsonData);
@@ -97,6 +103,7 @@ class UserRepo implements FireStoreService {
     var createdMember = await _membersCollection.doc(userId).get();
     return createdMember.data()!.isEmpty ? false : true;
   }
+
   @override
   Future<bool> checkAdminIsCreated(String userId) async {
     var createdMember = await _adminCollection.doc(userId).get();
@@ -115,8 +122,8 @@ class UserRepo implements FireStoreService {
       }
     }
 
-    final data = response.docs.map((e) => (e.data())
-        .map((key, value) => MapEntry(key, value?.toString() ?? "")));
+    final data = response.docs.map((e) =>
+        (e.data()).map((key, value) => MapEntry(key, value?.toString() ?? "")));
     await saveDataAsJson(data.toList());
 
     // List<List<String>> data = [];

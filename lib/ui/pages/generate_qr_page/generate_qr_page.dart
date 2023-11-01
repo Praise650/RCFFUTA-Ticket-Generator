@@ -13,6 +13,7 @@ import '../../widgets/drop_downs/custom_institution_dropdown.dart';
 import '../../widgets/drop_downs/custom_units_dropdown.dart';
 import '../../widgets/drop_downs/custom_zone_dropdown.dart';
 import '../../widgets/input/general_input.dart';
+import '../../widgets/loader.dart';
 import '../../widgets/radio_widget.dart';
 import '../auth/login.dart';
 import 'view_model/generate_qr_view_model.dart';
@@ -47,6 +48,7 @@ class _GenerateQRPageState extends State<GenerateQRPage> {
                       key: model.formKey,
                       child: Column(
                         children: [
+                          showInfo(),
                           Row(
                             children: [
                               Image.asset(

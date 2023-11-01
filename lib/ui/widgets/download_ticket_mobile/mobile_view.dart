@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:rcf_attendance_generator/ui/widgets/loader.dart';
 
 import '../../pages/download_qr/controller/download_qr_controller.dart';
 import '../../layouts/scrollable_base_scaffold_body.dart';
-import '../download_ticket/form_left_widget.dart';
 import '../../../core/states/ticket_state.dart';
 import '../../../app/images.dart';
 import '../../styles/color.dart';
 import '../../styles/texts.dart';
+import 'form_left_mobile.dart';
 import 'infos_right_mobile.dart';
 
 class DownloadQrMobileView extends StatelessWidget {
@@ -33,6 +34,8 @@ class DownloadQrMobileView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              showInfo(),
+              const SizedBox(height:10),
               Row(
                 children: [
                   Image.asset(
@@ -52,15 +55,18 @@ class DownloadQrMobileView extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               FormLeftMobile(
-                linearGradient: AppColors.linearGradient,
+                linearGradient: linearGradient,
                 constraints: constraints,
                 controller: controller,
               ),
               RepaintBoundary(
                 key: controller.qrKey,
-                child: InfosRightMobile(
-                  constraints: constraints,
-                  controller: controller,
+                child: SizedBox(
+                  height: 350,
+                  child: InfosRightMobile(
+                    constraints: constraints,
+                    controller: controller,
+                  ),
                 ),
               ),
               const SizedBox(height: 16),
@@ -82,7 +88,7 @@ class DownloadQrMobileView extends StatelessWidget {
                       borderRadius: BorderRadius.zero,
                     ),
                   ),
-                  child: Text(
+                  child: controller.isLoading == true? buildLoaderWidget():Text(
                     'DOWNLOAD',
                     style: GoogleFonts.spaceGrotesk(
                       color: AppColors.white,

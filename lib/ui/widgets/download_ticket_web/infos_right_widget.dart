@@ -6,8 +6,8 @@ import '../../../app/images.dart';
 import '../../pages/download_qr/controller/download_qr_controller.dart';
 import '../../styles/color.dart';
 
-class InfosRightMobile extends StatelessWidget {
-  const InfosRightMobile({
+class InfosRightWidget extends StatelessWidget {
+  const InfosRightWidget({
     super.key,
     required this.constraints,
     required this.controller,
@@ -20,32 +20,33 @@ class InfosRightMobile extends StatelessWidget {
     return Container(
       width: constraints.maxWidth,
       height: constraints.maxHeight * 0.4,
-      // constraints: const BoxConstraints(maxWidth: 1000),
-      padding: const EdgeInsets.all(10),
+      // width: constraints.maxWidth * 0.6,
+      constraints: const BoxConstraints(maxWidth: 1000),
+      padding: const EdgeInsets.symmetric(vertical: 45, horizontal: 40),
       decoration: const BoxDecoration(
         color: AppColors.purpleNormal,
       ),
       child: LayoutBuilder(
         builder: (context, constraints2) => Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Expanded(
-              child: SizedBox(
-                height: constraints2.maxHeight,
-                width: constraints2.maxWidth * 0.4,
-                child: AspectRatio(
-                  aspectRatio: 1.0,
-                  child: Image.asset(
-                    AppImages.cover,
-                    fit: BoxFit.fill,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                child: SizedBox(
+                  height: constraints2.maxHeight,
+                  // width: constraints2.maxWidth * 0.4,
+                  // width: constraints2.maxWidth * 0.6,
+                  child: AspectRatio(
+                    aspectRatio: 1.0,
+                    child: Image.asset(
+                      AppImages.cover,
+                      fit: BoxFit.fill,
+                    ),
                   ),
                 ),
               ),
-            ),
-            Expanded(
-              child: Container(
-                width: constraints2.maxWidth * 0.4,
+              Container(
+                width: constraints2.maxWidth * 0.3,
                 padding: const EdgeInsets.all(16),
                 color: Colors.white,
                 child: Column(
@@ -83,20 +84,20 @@ class InfosRightMobile extends StatelessWidget {
                         borderRadius: const BorderRadius.all(
                           Radius.circular(63),
                         ),
-                        child:QrImageView(
-                          data: controller.user!.uuid.toString(),
-                          version: QrVersions.auto,
-                          // size: 190.0,
-                          gapless: true,
-                          errorStateBuilder: (ctx, err) {
-                            return const Center(
-                              child: Text(
-                                'Something went wrong!!!',
-                                textAlign: TextAlign.center,
+                        child: QrImageView(
+                                data: controller.user!.uuid.toString(),
+                                version: QrVersions.auto,
+                                // size: 190.0,
+                                gapless: true,
+                                errorStateBuilder: (ctx, err) {
+                                  return const Center(
+                                    child: Text(
+                                      'Something went wrong!!!',
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  );
+                                },
                               ),
-                            );
-                          },
-                        ),
                       ),
                     ),
                     const SizedBox(height: 16),
@@ -116,7 +117,7 @@ class InfosRightMobile extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                'Ignite',
+                                'RISING ARMY',
                                 style: GoogleFonts.spaceGrotesk(
                                   fontSize: 10,
                                   fontWeight: FontWeight.w700,
@@ -181,9 +182,8 @@ class InfosRightMobile extends StatelessWidget {
                   ],
                 ),
               ),
-            ),
-          ],
-        ),
+            ],
+          ),
       ),
     );
   }

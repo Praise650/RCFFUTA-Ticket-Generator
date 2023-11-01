@@ -34,13 +34,8 @@ class RouteManager {
         );
       default:
         return MaterialPageRoute(
-          builder: (_) => Scaffold(
-            body: Center(
-              child: Text(
-                'No route defined for ${settings.name}',
-              ),
-            ),
-          ),
+          builder: (_) => const GenerateQRPage(),
+          settings: settings,
         );
     }
   }

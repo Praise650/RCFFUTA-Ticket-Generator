@@ -2,10 +2,10 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 
 
-import 'package:rcf_attendance_generator/app/images.dart';
-import 'package:rcf_attendance_generator/utils/app_response.dart';
-import '../../widgets/download_qr/mobile_view.dart';
+import '../../../app/images.dart';
 import '../../../core/states/ticket_state.dart';
+import '../../../utils/app_response.dart';
+import '../../widgets/download_ticket_mobile/mobile_view.dart';
 import 'controller/download_qr_controller.dart';
 import 'package:provider/provider.dart';
 import '../../widgets/loader.dart';

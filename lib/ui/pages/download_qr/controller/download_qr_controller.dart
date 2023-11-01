@@ -1,24 +1,20 @@
 // ignore_for_file: avoid_print
-
-import 'dart:typed_data';
 import 'dart:js_interop';
-import 'package:universal_html/html.dart' as html;
 
 import 'package:flutter/material.dart';
-import 'package:pdf/pdf.dart';
-import 'package:pdf/widgets.dart' as pw;
-import 'package:rcf_attendance_generator/utils/app_response.dart';
 
 import '../../../../core/service/download_ticket_service.dart';
 import '../../../../core/service/firestore_service.dart';
 import '../../../../core/models/personal_data.dart';
-import '../../../../core/service/navigator_service.dart';
 import '../../../../core/states/ticket_state.dart';
 import '../../../../app/locator.dart';
 
 class DownloadQrController extends ChangeNotifier {
   final _fService = locator<FireStoreService>();
   final _downloadService = locator<DownloadTicketService>();
+
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
 
   PersonalDataForm? user;
   ITicketState state = ITicketState();
@@ -35,23 +31,23 @@ class DownloadQrController extends ChangeNotifier {
     notifyListeners();
   }
 
-
-
   Future<void> captureAndSavePng() async {
-    state = LoadingTicketState();
+    _isLoading = true;
     notifyListeners();
-    print("Starting download ...");
-    try{
-
-      // uploadTicket(pngBytes);
-      _showQRandPrint(pngBytes);
-      print("Image downloaded");
-      AppResponse.success("Download Successful");
-      state = SuccessTicketState();
-      notifyListeners();
-    }catch(e){
-      state = FailureTicketState();
-      AppResponse.error("Failed to download, Please try again");
+    try {
+      await  _downloadService.captureAndSavePng(qrkey: _qrkey).then((value) async=>
+           await _downloadService.convertToPdf(user!.uuid!).then((value) async=>
+              user!.imageUrl == null
+                  ? await _downloadService.uploadFileToStorage(user!.uuid!,user!.id!)
+                  : await _downloadService.downloadTicketToDevice(
+                      id: user!.uuid!)))
+          .then((value) {
+        _isLoading = false;
+        notifyListeners();
+      });
+    } catch (e) {
+      print(e);
+      _isLoading = false;
       notifyListeners();
     }
   }
