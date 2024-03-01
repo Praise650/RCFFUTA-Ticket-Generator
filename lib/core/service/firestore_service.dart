@@ -15,4 +15,6 @@ abstract class FireStoreService {
   Future<void> extractAndDownloadData(
       QuerySnapshot<Map<String, dynamic>> response,
       Map<String, List<String>> dataJson);
+
+  String get generateId;
 }

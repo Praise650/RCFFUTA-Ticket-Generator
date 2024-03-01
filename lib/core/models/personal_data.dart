@@ -1,11 +1,13 @@
 class PersonalDataForm {
-
   final String? fullname;
   final String? firstname;
   final String? lastname;
   final String? email;
   final String? phoneNumber;
   final String? gender;
+  final String? age;
+  final String? church;
+  final String? school;
   // final Institution? zone;
   final String? zone;
   final String? fellowshipName;
@@ -32,6 +34,9 @@ class PersonalDataForm {
     this.fellowshipName,
     this.unit,
     this.portfolio,
+    this.age,
+    this.church,
+    this.school,
     //parameters to be used later
     this.id,
     this.uuid,
@@ -57,7 +62,9 @@ class PersonalDataForm {
         portfolio: json['portfolio'] as String?,
         uuid: json['uuid'] as String?,
         imageUrl: json["imageUrl"] as String?,
-
+        age: json['age'] as String?,
+        church: json['church'] as String?,
+        school: json['school'] as String?,
         // paremeters to be added later
         attending: json['attending'] as bool?,
         isAdmin: json['isAdmin'] as bool?,
@@ -72,29 +79,31 @@ class PersonalDataForm {
       );
 
   Map<String, dynamic> _toJson() => {
-        'fullname':fullname,
-        'firstname':firstname,
-        'lastname':lastname,
-        'email':email,
+        'fullname': fullname,
+        'firstname': firstname,
+        'lastname': lastname,
+        'email': email,
         'phoneNumber': phoneNumber,
-        'gender':gender,
-        'zone':zone,
-        'fellowshipName':fellowshipName,
-        'unit':unit,
-        'portfolio':portfolio,
-        'uuid':uuid,
+        'gender': gender,
+        'age': age,
+        'church': church,
+        'school': school,
+        // 'zone':zone,
+        // 'fellowshipName':fellowshipName,
+        // 'unit':unit,
+        // 'portfolio':portfolio,
+        'uuid': uuid,
         'imageUrl': imageUrl,
-        'attending':attending,
-        'isAdmin':isAdmin,
+        'attending': attending,
+        'isAdmin': isAdmin,
 
-        //parameters that can be used later 
+        //parameters that can be used later
         'id': id,
         'createdAt': createdAt?.toIso8601String(),
         'updatedAt': updatedAt?.toIso8601String(),
       };
 
   Map<String, dynamic> toJson() => _toJson();
-
 
   @override
   String toString() {

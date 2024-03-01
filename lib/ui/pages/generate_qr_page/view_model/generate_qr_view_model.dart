@@ -10,6 +10,7 @@ import '../../../../core/service/firestore_service.dart';
 import '../../../../core/service/auth_service.dart';
 import '../../../../core/service/navigator_service.dart';
 import '../../../../core/states/ticket_state.dart';
+import '../../../../routes/app_routes.dart';
 import '../../../../utils/app_response.dart';
 import '../../../../utils/id_generator.dart';
 import '../../../../app/locator.dart';
@@ -18,15 +19,18 @@ class GenerateQrViewModel extends ChangeNotifier {
   final _authService = locator<AuthService>();
   final _fService = locator<FireStoreService>();
   final _navigationService = locator<NavigatorService>();
-  final RcfZonesRepo _zonesRepo = RcfZonesRepo();
+  final _zonesRepo = RcfZonesRepo();
   RcfZonesRepo get zonesRepo => _zonesRepo;
   ITicketState state = ITicketState();
-  late User? user;
+  // late User? user;
 
   TextEditingController firstname = TextEditingController();
   TextEditingController lastname = TextEditingController();
+  TextEditingController age = TextEditingController();
   TextEditingController email = TextEditingController();
   TextEditingController phoneNumber = TextEditingController();
+  TextEditingController church = TextEditingController();
+  TextEditingController school = TextEditingController();
   String? gender = 'Male';
   RcfZones? selectedZone;
   String? selectedInstitution;
@@ -54,25 +58,30 @@ class GenerateQrViewModel extends ChangeNotifier {
   }
 
   void createAndSaveUser() async {
-    if (saveAndValidate() && isNotNull()) {
+    // if (saveAndValidate() && isNotNull()) {
+    if (saveAndValidate()) {
       print("state of formKey: ${saveAndValidate()} and ${isNotNull()}");
       _isLoading = true;
       notifyListeners();
       try {
-        user = await _authService.register(
-            email: email.text, password: phoneNumber.text);
-        PersonalDataForm personalDataForm = PersonalDataForm(
-          id: user!.uid,
+        // user = await _authService.register(
+        //     email: email.text, password: phoneNumber.text);
+
+        final personalDataForm = PersonalDataForm(
+          id: _fService.generateId,
           fullname: ("${lastname.text} ${firstname.text}").toString(),
           lastname: lastname.text,
           firstname: firstname.text,
           email: email.text,
           phoneNumber: phoneNumber.text,
           gender: gender,
-          zone: selectedZone!.zone,
-          fellowshipName: selectedInstitution,
-          unit: selectedUnit,
-          portfolio: selectedPortfolio ?? 'Nil',
+          age: age.text,
+          church: church.text,
+          school: school.text,
+          // zone: selectedZone!.zone,
+          // fellowshipName: selectedInstitution,
+          // unit: selectedUnit,
+          // portfolio: selectedPortfolio ?? 'Nil',
           uuid:
               IDGenerator.createId(firstname.text, lastname.text).toUpperCase(),
           createdAt: DateTime.now(),
@@ -82,12 +91,12 @@ class GenerateQrViewModel extends ChangeNotifier {
         );
         notifyListeners();
         print("PersonalDataForm: ${personalDataForm.toJson()}");
-        if (user != null) {
+        if (personalDataForm.isDefinedAndNotNull) {
           _fService
-              .uploadMemberInformation(personalDataForm.toJson(), user?.uid)
+              .uploadMemberInformation(personalDataForm.toJson(), personalDataForm.id!)
               .then(
-                (value) => _navigationService.navigateToDownloadQrPage(
-                  args: user!.uid.toString(),
+                (value) => _navigationService.replace(
+                  AppRoutes.thankYou
                 ),
               );
         }

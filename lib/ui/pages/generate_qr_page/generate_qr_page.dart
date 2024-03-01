@@ -59,7 +59,7 @@ class _GenerateQRPageState extends State<GenerateQRPage> {
                               const SizedBox(width: 10),
                               Expanded(
                                 child: Text(
-                                  "LTP 2023 Registration".toUpperCase(),
+                                  "CRM 2024 Registration".toUpperCase(),
                                   style: kHeadline1TextStyle.copyWith(
                                     color: AppColors.textSecondary,
                                   ),
@@ -81,6 +81,12 @@ class _GenerateQRPageState extends State<GenerateQRPage> {
                           ),
                           GeneralInput(
                             appContext: context,
+                            hintText: '16',
+                            label: 'Age',
+                            controller: model.age,
+                          ),
+                          GeneralInput(
+                            appContext: context,
                             hintText: 'ayokanmi12@gmail.com',
                             controller: model.email,
                             label: 'Email',
@@ -96,74 +102,87 @@ class _GenerateQRPageState extends State<GenerateQRPage> {
                             value: model.gender,
                             textValue: const ['Male', 'Female'],
                           ),
-                          CustomZoneDropdown(
-                            label: "Zone",
+                          GeneralInput(
                             appContext: context,
-                            hintText: 'Select a zone',
+                            label: 'School',
+                            controller: model.school,
+                            hintText: 'Oyemekun Grammar School',
                           ),
-                          model.selectedZone.isNull
-                              ? const SizedBox.shrink()
-                              : CustomInstitutionDropdown(
-                                  appContext: context,
-                                  label: "Institution",
-                                  hintText: "Select an Institution",
-                                  onChanged: (String? value) => setState(() {
-                                    model.selectedInstitution = value;
-                                    debugPrint(model.selectedInstitution);
-                                  }),
-                                  value: model.selectedZone!.institutions!,
-                                  selectedInstitution:
-                                      model.selectedInstitution,
-                                ),
-                          CustomUnitDropdown(
+                          GeneralInput(
                             appContext: context,
-                            label: 'Member / Worker',
-                            hintText: 'Editorial Unit',
-                            value: model.zonesRepo.units,
-                            selectedUnit: model.selectedUnit,
-                            onChanged: (String? value) => setState(() {
-                              model.selectedUnit = value;
-                              print(model.selectedUnit);
-                            }),
+                            label: 'Church',
+                            controller: model.church,
+                            hintText: 'Seed Of Faith Parish',
                           ),
-                          CustomUnitDropdown(
-                            appContext: context,
-                            label: 'PortFolio (For Executives)',
-                            hintText: 'Portfolio',
-                            value: model.zonesRepo.positions,
-                            selectedUnit: model.selectedPortfolio,
-                            onChanged: (String? value) {
-                              setState(() {
-                                model.selectedPortfolio = value;
-                                print(model.selectedPortfolio);
-                              });
-                            },
-                          ),
+                          // CustomZoneDropdown(
+                          //   label: "Zone",
+                          //   appContext: context,
+                          //   hintText: 'Select a zone',
+                          // ),
+                          // model.selectedZone.isNull
+                          //     ? const SizedBox.shrink()
+                          //     : CustomInstitutionDropdown(
+                          //         appContext: context,
+                          //         label: "Institution",
+                          //         hintText: "Select an Institution",
+                          //         onChanged: (String? value) => setState(() {
+                          //           model.selectedInstitution = value;
+                          //           debugPrint(model.selectedInstitution);
+                          //         }),
+                          //         value: model.selectedZone!.institutions!,
+                          //         selectedInstitution:
+                          //             model.selectedInstitution,
+                          //       ),
+                          // CustomUnitDropdown(
+                          //   appContext: context,
+                          //   label: 'Member / Worker',
+                          //   hintText: 'Editorial Unit',
+                          //   value: model.zonesRepo.units,
+                          //   selectedUnit: model.selectedUnit,
+                          //   onChanged: (String? value) => setState(() {
+                          //     model.selectedUnit = value;
+                          //     print(model.selectedUnit);
+                          //   }),
+                          // ),
+                          // CustomUnitDropdown(
+                          //   appContext: context,
+                          //   label: 'PortFolio (For Executives)',
+                          //   hintText: 'Portfolio',
+                          //   value: model.zonesRepo.positions,
+                          //   selectedUnit: model.selectedPortfolio,
+                          //   onChanged: (String? value) {
+                          //     setState(() {
+                          //       model.selectedPortfolio = value;
+                          //       print(model.selectedPortfolio);
+                          //     });
+                          //   },
+                          // ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              BaseButton(
-                                isBusy: model.isLoading,
-                                width: 100,
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const LoginPage(),
-                                    ),
-                                  );
-                                },
-                                iconColor: AppColors.white,
-                                child: const Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Text(
-                                    'Login',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              ),
+                              const SizedBox(),
+                              // BaseButton(
+                              //   isBusy: model.isLoading,
+                              //   width: 100,
+                              //   onPressed: () {
+                              //     Navigator.push(
+                              //       context,
+                              //       MaterialPageRoute(
+                              //         builder: (context) => const LoginPage(),
+                              //       ),
+                              //     );
+                              //   },
+                              //   iconColor: AppColors.white,
+                              //   child: const Padding(
+                              //     padding: EdgeInsets.all(8.0),
+                              //     child: Text(
+                              //       'Login',
+                              //       style: TextStyle(
+                              //         color: Colors.white,
+                              //       ),
+                              //     ),
+                              //   ),
+                              // ),
                               BaseButton(
                                 isBusy: model.isLoading,
                                 width: 100,

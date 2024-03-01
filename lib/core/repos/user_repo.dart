@@ -6,7 +6,8 @@ import '../models/personal_data.dart';
 class UserRepo implements FireStoreService {
   final _fsInstance = FirebaseFirestore.instance;
   // String? _userId;
-  final String membersCollectionPath = "Attendees";
+  // final String membersCollectionPath = "Attendees";
+  final String membersCollectionPath = "Students";
   final String adminCollectionPath = "Admins";
   late CollectionReference<Map<String, dynamic>> _membersCollection;
   late CollectionReference<Map<String, dynamic>> _adminCollection;
@@ -29,7 +30,7 @@ class UserRepo implements FireStoreService {
   @override
   Future<List<PersonalDataForm>> getMembersCollection() async {
     QuerySnapshot<Map<String, dynamic>> response =
-        await _fsInstance.collection(membersCollectionPath).limit(20).get();
+        await _membersCollection.limit(20).get();
     Map<String, List<String>> dataJson = {};
 
     // await extractAndDownloadData(response, dataJson);
@@ -86,13 +87,13 @@ class UserRepo implements FireStoreService {
   @override
   Future<void> updateMemberInformation(
       Map<String, dynamic> jsonData, uid) async {
-    await _fsInstance.collection(membersCollectionPath).doc(uid).update(jsonData);
+    await _membersCollection.doc(uid).update(jsonData);
   }
   
   @override
   Future<void> uploadMemberInformation(
       Map<String, dynamic> jsonData, uid) async {
-    await _fsInstance.collection(membersCollectionPath).doc(uid).set(jsonData);
+    await _membersCollection.doc(uid).set(jsonData);
   }
 
   @override
@@ -140,5 +141,11 @@ class UserRepo implements FireStoreService {
     // await saveDataAsCsv(data);
 
     print("Number of Data converted: ${data.length}");
+  }
+
+  @override
+  String get generateId  {
+    final generatedId = _membersCollection.doc().id;
+    return generatedId;
   }
 }

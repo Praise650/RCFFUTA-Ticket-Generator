@@ -7,6 +7,7 @@ class AppRoutes {
   static const String downloadQrPage = '/download_qr_page';
   static const String homeScreen = '/home_screen';
   static const String dashboard = '/dashboard-screen';
+  static const String thankYou = '/thank-you';
   static const String appNavigationScreen = '/app_navigation_screen';
 
   // static Map<String, WidgetBuilder> routes = {

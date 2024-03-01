@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../ui/pages/thanks/thank_you_.dart';
 import 'app_routes.dart';
 import 'routes.dart';
 
@@ -30,6 +31,12 @@ class RouteManager {
         var userName = settings.arguments as String;
         return MaterialPageRoute(
           builder: (context) => DownloadQRPage(userId: userName),
+          settings: settings,
+        );
+        case AppRoutes.thankYou:
+        // var userName = settings.arguments as String;
+        return MaterialPageRoute(
+          builder: (context) => const ThankYou(),
           settings: settings,
         );
       default:
