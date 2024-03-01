@@ -59,7 +59,7 @@ class _GenerateQRPageState extends State<GenerateQRPage> {
                               const SizedBox(width: 10),
                               Expanded(
                                 child: Text(
-                                  "CRM 2024 Registration".toUpperCase(),
+                                  "CRM SSO 2024 Registration".toUpperCase(),
                                   style: kHeadline1TextStyle.copyWith(
                                     color: AppColors.textSecondary,
                                   ),
@@ -85,12 +85,12 @@ class _GenerateQRPageState extends State<GenerateQRPage> {
                             label: 'Age',
                             controller: model.age,
                           ),
-                          GeneralInput(
-                            appContext: context,
-                            hintText: 'ayokanmi12@gmail.com',
-                            controller: model.email,
-                            label: 'Email',
-                          ),
+                          // GeneralInput(
+                          //   appContext: context,
+                          //   hintText: 'ayokanmi12@gmail.com',
+                          //   controller: model.email,
+                          //   label: 'Email',
+                          // ),
                           GeneralInput(
                             appContext: context,
                             label: 'Phone Number',

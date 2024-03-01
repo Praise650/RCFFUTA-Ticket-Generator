@@ -72,7 +72,7 @@ class GenerateQrViewModel extends ChangeNotifier {
           fullname: ("${lastname.text} ${firstname.text}").toString(),
           lastname: lastname.text,
           firstname: firstname.text,
-          email: email.text,
+          // email: email.text,
           phoneNumber: phoneNumber.text,
           gender: gender,
           age: age.text,

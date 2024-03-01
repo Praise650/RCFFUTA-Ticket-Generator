@@ -33,7 +33,7 @@ class ThankYou extends StatelessWidget {
                   const SizedBox(width: 10),
                   Expanded(
                     child: Text(
-                      "CRM 2024 Registration".toUpperCase(),
+                      "CRM SSO 2024 Registration".toUpperCase(),
                       style: kHeadline1TextStyle.copyWith(
                         color: AppColors.textSecondary,
                       ),
